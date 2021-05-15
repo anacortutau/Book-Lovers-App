@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Book-Lovers-App</string>
+    <string name="sign_up">Registro</string>
+    <string name="sign_in">Login</string>
+
+    <string name="name">Nombre de Usuario</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="have_an_account">¿Ya tienes una cuenta?</string>
+    <string name="have_not_an_account">¿No tienes una cuenta? Registrate</string>
+
+    <string name="name_error">error_nombre</string>
+    <string name="name_error_no_update">error_mismo_nombre</string>
+    <string name="email_error">error_email</string>
+    <string name="email_doesnt_match">error_formato_email</string>
+    <string name="email_error_no_update">error_mismo_email</string>
+    <string name="password_error">error_password</string>
+    <string name="password_error_less_than">Password debe ser mayor de 5 caracteres</string>
+
+    <string name="update_profile">Actualizar Perfil</string>
+    <string name="logout">Log Out</string>
+    <string name="delete">Borrar Usuario</string>
+    <string name="profile">Perfil</string>
+    <string name="UserName">User Name</string>
+    <string name="comics">Comics</string>
+    <string name="books">Libros</string>
+    <string name="login">Login</string>
+    <string name="menuPrincipal">Menu Principal</string>
+    <string name="createBook">Crear Libro</string>
+    <string name="listBooks">Ver Libros</string>
+    <string name="title">Titulo</string>
+    <string name="author">Autor</string>
+    <string name="sinopsis">Sinopsis</string>
+    <string name="theme">Tema</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_error">El titulo no puede estar vacio</string>
+    <string name="author_error">El autor no puede estar vacio</string>
+    <string name="sinopsis_error">La sinopsis no puede estar vacia</string>
+    <string name="theme_error">El tema no puede estar vacio</string>
+    <string name="note">nota</string>
+
+    <string-array name="themes">
+        <item>TERROR</item>
+        <item>MYSTERY</item>
+        <item>ADVENTURE</item>
+        <item>ROMANCE</item>
+        <item>HISTORY</item>
+    </string-array>
+</resources>
