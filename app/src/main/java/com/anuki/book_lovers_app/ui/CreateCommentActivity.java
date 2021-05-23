@@ -132,7 +132,7 @@ public class CreateCommentActivity extends AppCompatActivity {
                         Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
                         Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
                                 + " titulo: " + response.body().getTitle());
-                        startActivity(new Intent(getApplicationContext(), ListCommentsActivity.class).putExtra("book", book));
+                        startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("book", book));
                     }else{
                         Log.d("TAG1", "Error Desconocido");
                     }

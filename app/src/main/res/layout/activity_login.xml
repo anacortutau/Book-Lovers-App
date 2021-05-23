@@ -50,12 +50,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"/>
+                    android:text="@string/userName"/>
 
                 <EditText
-                    android:id="@+id/etUserName"
-                    android:drawableRight="@drawable/ic_email"
-                    android:hint="@string/UserName"
+                    android:id="@+id/etName"
+                    android:drawableRight="@drawable/ic_person"
+                    android:hint="@string/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -67,6 +67,7 @@
                 <EditText
                     android:id="@+id/etPassword"
                     android:drawableRight="@drawable/ic_lock"
+                    android:inputType="textPassword"
                     android:hint="@string/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

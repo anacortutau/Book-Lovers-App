@@ -58,15 +58,12 @@ public class BookDetailsActivity extends AppCompatActivity {
         if(intent.getExtras() !=null){
             book = (Book) intent.getSerializableExtra("book");
 
-
-            //String noteData = book.getNote().toString();
             String titleData = book.getTitle();
             String authorData = book.getAuthor();
             String sinopsisData = book.getSinopsis();
             String themeData = book.getTheme();
 
-            //note.setText(noteData);
-            rating.setRating(book.getNote().floatValue()*10);
+            rating.setRating(book.getNote().floatValue());
             title.setText(titleData);
             author.setText(authorData);
             theme.setText(themeData);

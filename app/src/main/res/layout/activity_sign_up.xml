@@ -80,6 +80,7 @@
                     android:id="@+id/etPassword"
                     android:drawableRight="@drawable/ic_lock"
                     android:hint="@string/password"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
