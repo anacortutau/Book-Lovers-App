@@ -1,15 +1,17 @@
 package com.anuki.book_lovers_app.ui;
 
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
@@ -26,11 +28,11 @@ public class CreateBookActivity extends AppCompatActivity {
     private EditText etTitle;
     private EditText etAuthor;
     private EditText etSinopsis;
-    private EditText etTheme;
     private Button btCreate;
     private Button btCancel;
     private Button btMenu;
     private TextView tvLogut;
+    private Spinner spinner;
     private Book book;
 
     @Override
@@ -45,11 +47,17 @@ public class CreateBookActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
         etSinopsis = findViewById(R.id.etSinopsis);
-        etTheme = findViewById(R.id.etTheme);
         btCreate = findViewById(R.id.btCreateBook);
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
         tvLogut = findViewById(R.id.tvLogout);
+        spinner = findViewById(R.id.spinner);
+
+        String[] themes = {"Selecciona un tema", "MYSTERY", "TERROR", "ADVENTURE", "ROMANCE", "HISTORY"};
+        ArrayAdapter <String> themesAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, themes);
+        spinner.setAdapter(themesAdapter);
+
 
         btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +95,7 @@ public class CreateBookActivity extends AppCompatActivity {
         etTitle.setText(null);
         etAuthor.setText(null);
         etSinopsis.setText(null);
-        etTheme.setText(null);
+        spinner.setSelection(0);
         etTitle.requestFocus();
     }
 
@@ -95,7 +103,7 @@ public class CreateBookActivity extends AppCompatActivity {
         String title = etTitle.getText().toString().trim();
         String author = etAuthor.getText().toString().trim();
         String sinopsis = etSinopsis.getText().toString().trim();
-        String theme = etTheme.getText().toString().trim();
+        String theme = spinner.getSelectedItem().toString().trim();
 
         if(title.isEmpty()){
             etTitle.setError(getResources().getString(R.string.title_error));
@@ -115,9 +123,9 @@ public class CreateBookActivity extends AppCompatActivity {
             return;
         }
 
-        if(theme.isEmpty()){
-            etTheme.setError(getResources().getString(R.string.theme_error));
-            etTheme.requestFocus();
+        if(theme.isEmpty() || theme.equals("Selecciona un tema")){
+            Toast.makeText(this,"Debes seleccionar un tema", Toast.LENGTH_LONG).show();
+            spinner.requestFocus();
             return;
         }
 
@@ -142,6 +150,7 @@ public class CreateBookActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
                 if(response.code() == 201){
+                    Toast.makeText(CreateBookActivity.this, "El libro se ha creado correctamente", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Libro creado " + " id " + response.body().getId()
                             + " email: " + response.body().getTitle());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));

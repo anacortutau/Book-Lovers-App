@@ -42,9 +42,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
         Book book = bookList.get(position);
 
         String title = book.getTitle();
-        String theme = book.getTheme();
+        String author = book.getAuthor();
 
-        holder.theme.setText(theme);
+        holder.author.setText(author);
         holder.title.setText(title);
         holder.imageMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +67,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
     public class BookAdapterVH extends RecyclerView.ViewHolder {
 
         TextView title;
-        TextView theme;
+        TextView author;
         ImageView imageMore;
 
         public BookAdapterVH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleText);
-            theme = itemView.findViewById(R.id.themeText);
+            author = itemView.findViewById(R.id.authorText);
             imageMore = itemView.findViewById(R.id.imageMore);
 
 
