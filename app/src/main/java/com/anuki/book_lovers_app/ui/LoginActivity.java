@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anuki.book_lovers_app.model.User;
 import com.anuki.book_lovers_app.R;
@@ -102,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                             .saveUser(response.body());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                 }else if (response.code()==404){
+                    Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Usuario no existe");
                 }else{
                     Log.d("TAG1", "Error Desconocido");
