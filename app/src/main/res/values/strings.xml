@@ -39,6 +39,7 @@
     <string name="theme_error">El tema no puede estar vacio</string>
     <string name="note">nota</string>
     <string name="comments">Comments</string>
+    <string name="returnToBookDetail">Volver al Libro</string>
 
     <string-array name="themes">
         <item>TERROR</item>

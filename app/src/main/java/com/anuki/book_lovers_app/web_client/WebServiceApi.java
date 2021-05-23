@@ -1,6 +1,7 @@
 package com.anuki.book_lovers_app.web_client;
 
 import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.model.User;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 public interface WebServiceApi {
@@ -32,4 +34,7 @@ public interface WebServiceApi {
 
     @GET("/book-lovers/books")
     Call<List<Book>> getAllBook(@Header("Authorization")String authHeader);
+
+    @GET("/book-lovers/books/{id}")
+    Call<List<Comment>> getAllCommentsByBookId(@Header("Authorization")String authHeader, @Path("id") Integer id );
 }

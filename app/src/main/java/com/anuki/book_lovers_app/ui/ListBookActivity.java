@@ -27,7 +27,6 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
 
     Toolbar toolbar;
     RecyclerView recyclerView;
-
     BookAdapter bookAdapter;
 
     @Override
@@ -42,7 +41,6 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
         recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
 
         bookAdapter = new BookAdapter(this::ClickedBook);
-
         getAllBooks();
     }
 
@@ -76,7 +74,6 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
             }
         });
     }
-
 
     @Override
     public void ClickedBook(Book book) {
