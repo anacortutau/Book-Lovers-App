@@ -53,7 +53,7 @@ public class CreateBookActivity extends AppCompatActivity {
         tvLogut = findViewById(R.id.tvLogout);
         spinner = findViewById(R.id.spinner);
 
-        String[] themes = {"Selecciona un tema", "MYSTERY", "TERROR", "ADVENTURE", "ROMANCE", "HISTORY"};
+        String[] themes = {"Select a Theme", "MYSTERY", "TERROR", "ADVENTURE", "ROMANCE", "HISTORY"};
         ArrayAdapter <String> themesAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, themes);
         spinner.setAdapter(themesAdapter);
