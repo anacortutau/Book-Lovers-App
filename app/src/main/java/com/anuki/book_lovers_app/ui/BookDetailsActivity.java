@@ -1,33 +1,16 @@
 package com.anuki.book_lovers_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
-import com.anuki.book_lovers_app.model.Comment;
-import com.anuki.book_lovers_app.model.CommentAdapter;
-import com.anuki.book_lovers_app.shared.SharedResources;
-import com.anuki.book_lovers_app.web_client.WebService;
-import com.anuki.book_lovers_app.web_client.WebServiceApi;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BookDetailsActivity extends AppCompatActivity {
 

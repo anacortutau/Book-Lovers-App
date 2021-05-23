@@ -50,15 +50,6 @@
                     android:layout_height="wrap_content" />
 
                 <Button
-                    android:id="@+id/btComics"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/gradient_bt"
-                    android:text="@string/comics"
-                    android:textColor="@color/colorWhite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
                     android:id="@+id/btProfile"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/gradient_bt"
