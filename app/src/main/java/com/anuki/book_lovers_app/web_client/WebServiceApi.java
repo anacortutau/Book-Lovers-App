@@ -35,6 +35,9 @@ public interface WebServiceApi {
     @GET("/book-lovers/books")
     Call<List<Book>> getAllBook(@Header("Authorization")String authHeader);
 
-    @GET("/book-lovers/books/{id}")
+    @GET("/book-lovers/books/{id}/comments")
     Call<List<Comment>> getAllCommentsByBookId(@Header("Authorization")String authHeader, @Path("id") Integer id );
+
+    @POST("/book-lovers/books/{id}/comments")
+    Call<Comment> createComment(@Body Comment comment, @Header("Authorization")String authHeader, @Path("id") Integer id );
 }

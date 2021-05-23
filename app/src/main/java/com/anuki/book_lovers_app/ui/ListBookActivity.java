@@ -77,6 +77,6 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
 
     @Override
     public void ClickedBook(Book book) {
-        startActivity(new Intent(this,BookDetailsActivity.class).putExtra("data", book));
+        startActivity(new Intent(this,BookDetailsActivity.class).putExtra("book", book));
     }
 }

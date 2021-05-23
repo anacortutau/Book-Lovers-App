@@ -16,16 +16,19 @@ public class Book implements Serializable {
     private String sinopsis;
     @SerializedName("theme")
     private String theme;
+    @SerializedName("note")
+    private Double note;
 
     public Book() {
     }
 
-    public Book(Integer id, String title, String author, String sinopsis, String theme) {
+    public Book(Integer id, String title, String author, String sinopsis, String theme, Double note) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.sinopsis = sinopsis;
         this.theme = theme;
+        this.note = note;
     }
 
     public Integer getId() {
@@ -66,5 +69,13 @@ public class Book implements Serializable {
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public Double getNote() {
+        return note;
+    }
+
+    public void setNote(Double note) {
+        this.note = note;
     }
 }

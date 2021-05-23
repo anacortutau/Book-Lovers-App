@@ -15,7 +15,7 @@
         android:layout_below="@+id/textView"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:padding="20dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="4dp">
@@ -24,7 +24,12 @@
             android:orientation="vertical"
             android:padding="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"/>
 
             <TextView
                 android:id="@+id/titleText"
@@ -33,6 +38,11 @@
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/author"/>
             <TextView
                 android:id="@+id/authorText"
                 android:layout_width="match_parent"
@@ -40,6 +50,11 @@
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/theme"/>
             <TextView
                 android:id="@+id/themeText"
                 android:layout_width="match_parent"
@@ -47,6 +62,11 @@
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sinopsis"/>
             <TextView
                 android:id="@+id/sinopsisText"
                 android:layout_width="match_parent"
@@ -55,38 +75,18 @@
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="@color/colorWhite"
-                android:layout_height="match_parent"
-                tools:context=".ui.ListBookActivity">
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="Comment List"
-                        android:textColor="@color/colorBlack"
-                        android:gravity="center"
-                        android:layout_height="wrap_content" />
-                </androidx.appcompat.widget.Toolbar>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/recyclerview_bg"
-                    android:layout_height="match_parent">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerviewComment"
-                        android:padding="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </androidx.recyclerview.widget.RecyclerView>
-                </LinearLayout>
-
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/note"/>
+            <RatingBar
+                android:id="@+id/ratingStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="10"
+                android:stepSize="1"
+                android:isIndicator="true" />
 
             <Button
                 android:id="@+id/btComment"
@@ -95,7 +95,16 @@
                 android:text="@string/comments"
                 android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btListComments"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/list_comments"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>

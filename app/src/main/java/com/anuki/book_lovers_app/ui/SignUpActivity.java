@@ -133,8 +133,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         if(SharedResources.getInstance(this).isLoggedIn()){
-            Log.d("TAG1", "Usuario logado, enviando a Profile Activity");
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            Log.d("TAG1", "Usuario logado, enviando a Menu Activity");
+            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
         }
     }
 }

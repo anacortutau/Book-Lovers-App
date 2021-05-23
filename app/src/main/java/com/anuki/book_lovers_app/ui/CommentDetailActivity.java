@@ -3,6 +3,7 @@ package com.anuki.book_lovers_app.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import com.anuki.book_lovers_app.R;
 
+import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comment;
 
 import android.content.Intent;
@@ -16,7 +17,9 @@ public class CommentDetailActivity extends AppCompatActivity {
     TextView title;
     TextView user;
     TextView commentString;
+    TextView note;
     Comment comment;
+    Book book;
     Button btMenu;
     Button btReturnToBookDetail;
 
@@ -27,16 +30,19 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         title = findViewById(R.id.titleText);
         user = findViewById(R.id.userText);
+        note = findViewById(R.id.noteTextComment);
         commentString = findViewById(R.id.commentText);
         btMenu = findViewById(R.id.btMenu);
         btReturnToBookDetail = findViewById(R.id.btReturnToBookDetail);
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
-            comment = (Comment) intent.getSerializableExtra("dataComment");
+            comment = (Comment) intent.getSerializableExtra("comment");
             String titleData = comment.getTitle();
+            String noteData = comment.getNote().toString();
             String userData = comment.getUserName();
             String commentData = comment.getComment();
+            note.setText(noteData);
             title.setText(titleData);
             user.setText(userData);
             commentString.setText(commentData);
@@ -52,7 +58,10 @@ public class CommentDetailActivity extends AppCompatActivity {
         btReturnToBookDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class));
+                if(intent.getExtras() !=null){
+                    book = (Book) intent.getSerializableExtra("book");
+                }
+                startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("book", book));
             }
         });
     }

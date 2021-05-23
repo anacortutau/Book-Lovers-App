@@ -38,8 +38,14 @@
     <string name="sinopsis_error">La sinopsis no puede estar vacia</string>
     <string name="theme_error">El tema no puede estar vacio</string>
     <string name="note">nota</string>
-    <string name="comments">Comments</string>
+    <string name="comments">Create Comment</string>
     <string name="returnToBookDetail">Volver al Libro</string>
+    <string name="comment">Comentario</string>
+    <string name="nota">Nota</string>
+    <string name="createComment">Crear Comentario</string>
+    <string name="comment_error">El cuerpo del comentario es necesario, introduzca uno, por favor</string>
+    <string name="note_error">Es necesario introducir una nota</string>
+    <string name="list_comments">List Comments</string>
 
     <string-array name="themes">
         <item>TERROR</item>

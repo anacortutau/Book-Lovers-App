@@ -15,12 +15,12 @@ public class Comment implements Serializable {
     @SerializedName("comment")
     private String comment;
     @SerializedName("note")
-    private int note;
+    private Integer note;
 
     public Comment() {
     }
 
-    public Comment(Integer id, String title, String userName, String comment, int note) {
+    public Comment(Integer id, String title, String userName, String comment, Integer note) {
         this.id = id;
         this.title = title;
         this.userName = userName;
@@ -60,11 +60,11 @@ public class Comment implements Serializable {
         this.comment = comment;
     }
 
-    public int getNote() {
+    public Integer getNote() {
         return note;
     }
 
-    public void setNote(int note) {
+    public void setNote(Integer note) {
         this.note = note;
     }
 }

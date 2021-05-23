@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.CommentDetailActivity"></activity>
+        <activity android:name=".ui.ListCommentsActivity"></activity>
+        <activity android:name=".ui.CreateCommentActivity" />
+        <activity android:name=".ui.CommentDetailActivity" />
         <activity android:name=".ui.BookDetailsActivity" />
         <activity android:name=".ui.ListBookActivity" />
         <activity android:name=".ui.CreateBookActivity" />

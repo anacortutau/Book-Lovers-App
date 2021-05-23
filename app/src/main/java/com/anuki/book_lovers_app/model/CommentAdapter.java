@@ -44,7 +44,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
         String title = comment.getTitle();
         String userName = comment.getUserName();
 
-        holder.author.setText(userName);
+        holder.useNameText.setText(userName);
         holder.title.setText(title);
         holder.imageMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,15 +67,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
     public class CommentAdapterVH extends RecyclerView.ViewHolder {
 
         TextView title;
-        TextView author;
+        TextView useNameText;
         ImageView imageMore;
 
         public CommentAdapterVH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleText);
-            author = itemView.findViewById(R.id.authorText);
+            useNameText = itemView.findViewById(R.id.useNameText);
             imageMore = itemView.findViewById(R.id.imageMore);
-
         }
     }
 }
