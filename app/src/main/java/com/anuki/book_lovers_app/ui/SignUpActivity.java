@@ -47,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
         btSignUp = findViewById(R.id.btSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
+
+
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 201){
-                    Log.d("TAG1", "Usuario guardo correctamente");
+                    Log.d("TAG1", "Usuario guardado correctamente");
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 }else if(response.code()==409){
                     Log.d("TAG1", "El Usuario ya existe");

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.shared.SharedResources;
 import com.anuki.book_lovers_app.web_client.WebService;
@@ -33,6 +34,8 @@ public class CreateCommentActivity extends AppCompatActivity {
     private Button btMenu;
     private Comment comment;
     private Book book;
+
+    private Comic comic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +111,12 @@ public class CreateCommentActivity extends AppCompatActivity {
         comment.setTitle(titleString);
         comment.setComment(commentString);
         comment.setNote(Integer.parseInt(noteString));
-        createComment();
+        createCommentBook();
     }
 
-    private void createComment() {
+
+
+    private void createCommentBook() {
         String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
         String authHeader = "Bearer " + token;
 
@@ -122,7 +127,8 @@ public class CreateCommentActivity extends AppCompatActivity {
             Call<Comment> call = WebService
                     .getInstance()
                     .createService(WebServiceApi.class)
-                    .createComment(comment, authHeader, book.getId());
+                    .createCommentBook(comment, authHeader, book.getId());
+
 
             call.enqueue(new Callback<Comment>() {
                 @Override
@@ -144,10 +150,41 @@ public class CreateCommentActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void createCommentComic() {
+        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
+        String authHeader = "Bearer " + token;
+
+        Intent intent = getIntent();
+        if(intent.getExtras() !=null){
+            comic = (Comic) intent.getSerializableExtra("comic");
+
+            Call<Comment> call = WebService
+                    .getInstance()
+                    .createService(WebServiceApi.class)
+                    .createCommentComic(comment, authHeader, comic.getId());
 
 
+            call.enqueue(new Callback<Comment>() {
+                @Override
+                public void onResponse(Call<Comment> call, Response<Comment> response) {
+                    if(response.code() == 201){
 
+                        Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
+                        Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
+                                + " titulo: " + response.body().getTitle());
+                        startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
+                    }else{
+                        Log.d("TAG1", "Error Desconocido");
+                    }
+                }
 
-
+                @Override
+                public void onFailure(Call<Comment> call, Throwable t) {
+                    Log.d("TAG1", "Error Desconocido");
+                }
+            });
+        }
     }
 }

@@ -12,13 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.ListCommentsActivity"></activity>
+        <activity android:name=".ui.ListCommentsBooksActivity"></activity>
+        <activity android:name=".ui.ListCommentsComicsActivity"></activity>
         <activity android:name=".ui.CreateCommentActivity" />
-        <activity android:name=".ui.CommentDetailActivity" />
+        <activity android:name=".ui.CommentBookDetailActivity" />
+        <activity android:name=".ui.CommentComicDetailActivity" />
         <activity android:name=".ui.BookDetailsActivity" />
+        <activity android:name=".ui.ComicDetailsActivity" />
         <activity android:name=".ui.ListBookActivity" />
+        <activity android:name=".ui.ListComicActivity" />
         <activity android:name=".ui.CreateBookActivity" />
+        <activity android:name=".ui.CreateComicActivity" />
         <activity android:name=".ui.BooksMenuActivity" />
+        <activity android:name=".ui.ComicsMenuActivity" />
         <activity android:name=".ui.MenuActivity" />
         <activity android:name=".ui.SignUpActivity">
             <intent-filter>

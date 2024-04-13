@@ -21,10 +21,13 @@
     <string name="profile">Perfil</string>
     <string name="UserName">Nombre de Usuario</string>
     <string name="books">Libros</string>
+    <string name="comics">Comics</string>
     <string name="login">Login</string>
     <string name="menuPrincipal">Menu Principal</string>
     <string name="createBook">Crear Libro</string>
+    <string name="createComic">Crear Comic</string>
     <string name="listBooks">Ver Libros</string>
+    <string name="listComics">Ver Comics</string>
     <string name="title">Titulo</string>
     <string name="author">Autor</string>
     <string name="sinopsis">Sinopsis</string>

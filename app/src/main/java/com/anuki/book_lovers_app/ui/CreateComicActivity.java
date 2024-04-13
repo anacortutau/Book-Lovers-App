@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anuki.book_lovers_app.R;
-import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.shared.SharedResources;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateBookActivity extends AppCompatActivity {
+public class CreateComicActivity extends AppCompatActivity {
 
     private EditText etTitle;
     private EditText etAuthor;
@@ -33,17 +33,17 @@ public class CreateBookActivity extends AppCompatActivity {
     private Button btMenu;
     private TextView tvLogut;
     private Spinner spinner;
-    private Book book;
+    private Comic comic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_book);
+        setContentView(R.layout.activity_create_comic);
 
         setUpView();
     }
 
-    private void setUpView(){
+    private void setUpView() {
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
         etSinopsis = findViewById(R.id.etSinopsis);
@@ -58,11 +58,10 @@ public class CreateBookActivity extends AppCompatActivity {
                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, themes);
         spinner.setAdapter(themesAdapter);
 
-
         btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createBookCheck();
+                createComicCheck();
             }
         });
 
@@ -99,7 +98,7 @@ public class CreateBookActivity extends AppCompatActivity {
         etTitle.requestFocus();
     }
 
-    private void createBookCheck(){
+    private void createComicCheck(){
         String title = etTitle.getText().toString().trim();
         String author = etAuthor.getText().toString().trim();
         String sinopsis = etSinopsis.getText().toString().trim();
@@ -129,29 +128,29 @@ public class CreateBookActivity extends AppCompatActivity {
             return;
         }
 
-        book = new Book();
-        book.setAuthor(author);
-        book.setSinopsis(sinopsis);
-        book.setTheme(theme);
-        book.setTitle(title);
-        createBook();
+        comic = new Comic();
+        comic.setAuthor(author);
+        comic.setSinopsis(sinopsis);
+        comic.setTheme(theme);
+        comic.setTitle(title);
+        createComic();
     }
 
-    private void createBook() {
+    private void createComic() {
         String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
         String authHeader = "Bearer " + token;
 
-        Call<Book> call = WebService
+        Call<Comic> call = WebService
                 .getInstance()
                 .createService(WebServiceApi.class)
-                .createBook(book, authHeader);
+                .createComic(comic, authHeader);
 
-        call.enqueue(new Callback<Book>() {
+        call.enqueue(new Callback<Comic>() {
             @Override
-            public void onResponse(Call<Book> call, Response<Book> response) {
+            public void onResponse(Call<Comic> call, Response<Comic> response) {
                 if(response.code() == 201){
-                    Toast.makeText(CreateBookActivity.this, "El libro se ha creado correctamente", Toast.LENGTH_LONG).show();
-                    Log.d("TAG1", "Libro creado " + " id " + response.body().getId()
+                    Toast.makeText(CreateComicActivity.this, "El comic se ha creado correctamente", Toast.LENGTH_LONG).show();
+                    Log.d("TAG1", "Comic creado " + " id " + response.body().getId()
                             + " email: " + response.body().getTitle());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                 }else{
@@ -160,10 +159,12 @@ public class CreateBookActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Book> call, Throwable t) {
+            public void onFailure(Call<Comic> call, Throwable t) {
                 Log.d("TAG1", "Error Desconocido");
             }
         });
 
     }
-}
+
+
+    }

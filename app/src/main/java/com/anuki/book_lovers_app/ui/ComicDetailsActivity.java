@@ -2,51 +2,58 @@ package com.anuki.book_lovers_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.TextView;
+import android.widget.RatingBar;
+import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.TextView;
-
 import com.anuki.book_lovers_app.R;
-import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.model.Comic;
 
-public class BookDetailsActivity extends AppCompatActivity {
+
+public class ComicDetailsActivity extends AppCompatActivity {
 
     TextView title;
+
     TextView author;
+
     TextView theme;
+
     TextView sinopsis;
+
     TextView note;
+
     RatingBar rating;
-    Book book;
+
+    Comic comic;
+
     Button btComment;
     Button btListComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_details);
+        setContentView(R.layout.activity_comic_details);
 
         rating = findViewById(R.id.ratingStars);
-        title  = findViewById(R.id.titleText);
-        author  = findViewById(R.id.authorText);
-        sinopsis  = findViewById(R.id.sinopsisText);
+        title = findViewById(R.id.titleComicText);
+        author = findViewById(R.id.authorComicText);
+        sinopsis = findViewById(R.id.sinopsisText);
         theme = findViewById(R.id.themeText);
         btComment = findViewById(R.id.btComment);
         btListComment = findViewById(R.id.btListComments);
 
         Intent intent = getIntent();
-        if(intent.getExtras() !=null){
-            book = (Book) intent.getSerializableExtra("book");
+        if(intent.getExtras() !=null) {
+            comic = (Comic) intent.getSerializableExtra("comic");
 
-            String titleData = book.getTitle();
-            String authorData = book.getAuthor();
-            String sinopsisData = book.getSinopsis();
-            String themeData = book.getTheme();
+            String titleData = comic.getTitle();
+            String authorData = comic.getAuthor();
+            String sinopsisData = comic.getSinopsis();
+            String themeData = comic.getTheme();
 
-            rating.setRating(book.getNote().floatValue());
+            rating.setRating(comic.getNote().floatValue());
             title.setText(titleData);
             author.setText(authorData);
             theme.setText(themeData);
@@ -57,17 +64,15 @@ public class BookDetailsActivity extends AppCompatActivity {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("book", book));
+                startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("comic", comic));
             }
         });
 
         btListComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ListCommentsBooksActivity.class).putExtra("book", book));
+                startActivity(new Intent(getApplicationContext(), ListCommentsComicsActivity.class).putExtra("comic", comic));
             }
         });
-
     }
-
 }

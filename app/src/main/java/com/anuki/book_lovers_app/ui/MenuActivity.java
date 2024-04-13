@@ -14,6 +14,7 @@ import com.anuki.book_lovers_app.shared.SharedResources;
 public class MenuActivity extends AppCompatActivity {
 
     private Button btBooks;
+    private Button btComics;
     private Button btProfile;
     private TextView btLogout;
 
@@ -27,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setUpView(){
         btBooks = findViewById(R.id.btBooks);
+        btComics = findViewById(R.id.btComics);
         btProfile = findViewById(R.id.btProfile);
         btLogout = findViewById(R.id.tvLogout);
 
@@ -34,6 +36,13 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), BooksMenuActivity.class));
+            }
+        });
+
+        btComics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ComicsMenuActivity.class));
             }
         });
 

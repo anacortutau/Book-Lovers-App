@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.anuki.book_lovers_app.R;
-import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.model.CommentAdapter;
 import com.anuki.book_lovers_app.shared.SharedResources;
@@ -23,10 +23,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+public class ListCommentsComicsActivity extends AppCompatActivity implements CommentAdapter.ClickedItem {
 
-public class ListCommentsActivity extends AppCompatActivity implements CommentAdapter.ClickedItem {
-
-    Book book;
+    Comic comic;
     Toolbar toolbar;
     RecyclerView recyclerView;
     CommentAdapter commentAdapter;
@@ -34,16 +33,16 @@ public class ListCommentsActivity extends AppCompatActivity implements CommentAd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_comments);
+        setContentView(R.layout.activity_list_comments_comics);
 
-        toolbar = findViewById(R.id.toolbar);
-        recyclerView = findViewById(R.id.recyclerviewComment);
+        /*toolbar = findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recyclerviewComment);*/
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
-            book = (Book) intent.getSerializableExtra("book");
+            comic = (Comic) intent.getSerializableExtra("comic");
 
-            getAllCommentsById(book.getId());
+            getAllCommentsById(comic.getId());
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
             recyclerView.setItemViewCacheSize(5);
@@ -60,7 +59,7 @@ public class ListCommentsActivity extends AppCompatActivity implements CommentAd
         Call<List<Comment>> commentList = WebService
                 .getInstance()
                 .createService(WebServiceApi.class)
-                .getAllCommentsByBookId(authHeader, id);
+                .getAllCommentsByComicId(authHeader, id);
 
         commentList.enqueue(new Callback<List<Comment>>() {
             @Override
@@ -85,9 +84,11 @@ public class ListCommentsActivity extends AppCompatActivity implements CommentAd
 
     @Override
     public void ClickedComment(Comment comment) {
-        startActivity(new Intent(this,CommentDetailActivity.class)
+        startActivity(new Intent(this, CommentBookDetailActivity.class)
                 .putExtra("comment", comment)
-                .putExtra("book", book)
+                .putExtra("comic", comic)
         );
     }
+
+
 }
