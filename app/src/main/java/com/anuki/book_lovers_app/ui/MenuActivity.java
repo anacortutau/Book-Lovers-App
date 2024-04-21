@@ -32,35 +32,17 @@ public class MenuActivity extends AppCompatActivity {
         btProfile = findViewById(R.id.btProfile);
         btLogout = findViewById(R.id.tvLogout);
 
-        btBooks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), BooksMenuActivity.class));
-            }
-        });
+        btBooks.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), BooksMenuActivity.class)));
 
-        btComics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ComicsMenuActivity.class));
-            }
-        });
+        btComics.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ComicsMenuActivity.class)));
 
-        btProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-            }
-        });
+        btProfile.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
 
-        btLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedResources.getInstance(getApplicationContext()).logOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
+        btLogout.setOnClickListener(v -> {
+            SharedResources.getInstance(getApplicationContext()).logOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
 
     }

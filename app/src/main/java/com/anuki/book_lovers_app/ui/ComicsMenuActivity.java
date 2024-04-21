@@ -33,35 +33,17 @@ public class ComicsMenuActivity extends AppCompatActivity {
             btMenu = findViewById(R.id.btMenu);
             btLogout = findViewById(R.id.tvLogout);
 
-            btCreateComic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), CreateComicActivity.class));
-                }
-            });
+            btCreateComic.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateComicActivity.class)));
 
-            btListComics.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), ListComicActivity.class));
-                }
-            });
+            btListComics.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListComicActivity.class)));
 
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                }
-            });
+            btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
 
-            btLogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedResources.getInstance(getApplicationContext()).logOut();
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
+            btLogout.setOnClickListener(v -> {
+                SharedResources.getInstance(getApplicationContext()).logOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             });
         }
     }

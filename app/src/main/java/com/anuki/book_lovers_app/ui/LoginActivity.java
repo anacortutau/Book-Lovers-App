@@ -44,19 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         btLogin = findViewById(R.id.btLogin);
         tvSignUp = findViewById(R.id.tvSignUp);
 
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userLogin();
-            }
-        });
+        btLogin.setOnClickListener(v -> userLogin());
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
-            }
-        });
+        tvSignUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
     }
 
     private void userLogin(){
@@ -93,19 +83,19 @@ public class LoginActivity extends AppCompatActivity {
                 .createService(WebServiceApi.class)
                 .login(user);
 
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     Log.d("TAG1", "Usuario logeado " + " id " + response.body().getId()
                             + " email: " + response.body().getEmail());
                     SharedResources.getInstance(getApplicationContext())
                             .saveUser(response.body());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                }else if (response.code()==404){
+                } else if (response.code() == 404) {
                     Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Usuario no existe");
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }

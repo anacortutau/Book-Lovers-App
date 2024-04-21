@@ -61,18 +61,8 @@ public class ComicDetailsActivity extends AppCompatActivity {
 
         }
 
-        btComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("comic", comic));
-            }
-        });
+        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("comic", comic)));
 
-        btListComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ListCommentsComicsActivity.class).putExtra("comic", comic));
-            }
-        });
+        btListComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListCommentsComicsActivity.class).putExtra("comic", comic)));
     }
 }

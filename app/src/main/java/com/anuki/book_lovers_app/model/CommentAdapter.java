@@ -46,12 +46,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
 
         holder.useNameText.setText(userName);
         holder.title.setText(title);
-        holder.imageMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickedItem.ClickedComment(comment);
-            }
-        });
+        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedComment(comment));
 
     }
 

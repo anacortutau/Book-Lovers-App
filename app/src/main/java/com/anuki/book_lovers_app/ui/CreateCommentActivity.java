@@ -55,26 +55,11 @@ public class CreateCommentActivity extends AppCompatActivity {
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
 
-        btCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createCommentCheck();
-            }
-        });
+        btCreate.setOnClickListener(v -> createCommentCheck());
 
-        btCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cleanForm();
-            }
-        });
+        btCancel.setOnClickListener(v -> cleanForm());
 
-        btMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-            }
-        });
+        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
     }
 
     private void cleanForm() {
@@ -130,16 +115,16 @@ public class CreateCommentActivity extends AppCompatActivity {
                     .createCommentBook(comment, authHeader, book.getId());
 
 
-            call.enqueue(new Callback<Comment>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
-                    if(response.code() == 201){
+                    if (response.code() == 201) {
 
                         Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
                         Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
                                 + " titulo: " + response.body().getTitle());
                         startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("book", book));
-                    }else{
+                    } else {
                         Log.d("TAG1", "Error Desconocido");
                     }
                 }

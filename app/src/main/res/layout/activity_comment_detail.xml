@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.CommentBookDetailActivity">
+    tools:context=".ui.CommentDetailActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

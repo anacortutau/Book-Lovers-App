@@ -4,36 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.anuki.book_lovers_app.R;
 
 import com.anuki.book_lovers_app.model.Book;
-import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-public class CommentComicDetailActivity extends AppCompatActivity {
+
+public class CommentDetailActivity extends AppCompatActivity {
 
     TextView title;
     TextView user;
     TextView commentString;
     TextView note;
     Comment comment;
-    Comic comic;
+    Book book;
     Button btMenu;
-    Button btReturnToComicDetail;
+    Button btReturnToBookDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_comic_detail);
+        setContentView(R.layout.activity_comment_detail);
 
         title = findViewById(R.id.titleText);
         user = findViewById(R.id.userText);
         note = findViewById(R.id.noteTextComment);
         commentString = findViewById(R.id.commentText);
         btMenu = findViewById(R.id.btMenu);
-        btReturnToComicDetail = findViewById(R.id.btReturnToComicDetail);
+        btReturnToBookDetail = findViewById(R.id.btReturnToBookDetail);
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
@@ -48,24 +47,13 @@ public class CommentComicDetailActivity extends AppCompatActivity {
             commentString.setText(commentData);
         }
 
-        btMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-            }
-        });
+        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
 
-        btReturnToComicDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(intent.getExtras() !=null){
-                    comic = (Comic) intent.getSerializableExtra("comic");
-                }
-                startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
+        btReturnToBookDetail.setOnClickListener(v -> {
+            if(intent.getExtras() !=null){
+                book = (Book) intent.getSerializableExtra("book");
             }
+            startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("book", book));
         });
     }
-
-
-
 }

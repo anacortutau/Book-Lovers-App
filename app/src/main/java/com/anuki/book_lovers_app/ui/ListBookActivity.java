@@ -54,22 +54,22 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
                 .createService(WebServiceApi.class)
                 .getAllBook(authHeader);
 
-        booklist.enqueue(new Callback<List<Book>>() {
+        booklist.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     List<Book> bookResponse = response.body();
                     Log.d("TAG1", "Lista de libros " + response.body().toString());
                     bookAdapter.setData(bookResponse);
                     recyclerView.setAdapter(bookAdapter);
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Book>> call, Throwable t) {
-                Log.e("failure",t.getLocalizedMessage());
+                Log.e("failure", t.getLocalizedMessage());
 
             }
         });

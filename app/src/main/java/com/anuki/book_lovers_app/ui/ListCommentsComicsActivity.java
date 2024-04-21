@@ -61,22 +61,22 @@ public class ListCommentsComicsActivity extends AppCompatActivity implements Com
                 .createService(WebServiceApi.class)
                 .getAllCommentsByComicId(authHeader, id);
 
-        commentList.enqueue(new Callback<List<Comment>>() {
+        commentList.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     List<Comment> commentsResponse = response.body();
                     Log.d("TAG1", "Lista de Comentarios " + response.body().toString());
                     commentAdapter.setData(commentsResponse);
                     recyclerView.setAdapter(commentAdapter);
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
-                Log.e("failure",t.getLocalizedMessage());
+                Log.e("failure", t.getLocalizedMessage());
 
             }
         });
@@ -84,7 +84,7 @@ public class ListCommentsComicsActivity extends AppCompatActivity implements Com
 
     @Override
     public void ClickedComment(Comment comment) {
-        startActivity(new Intent(this, CommentBookDetailActivity.class)
+        startActivity(new Intent(this, CommentDetailActivity.class)
                 .putExtra("comment", comment)
                 .putExtra("comic", comic)
         );

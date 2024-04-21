@@ -46,12 +46,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapter
 
         holder.author.setText(author);
         holder.title.setText(title);
-        holder.imageMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickedItem.ClickedComic(comic);
-            }
-        });
+        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedComic(comic));
 
     }
 

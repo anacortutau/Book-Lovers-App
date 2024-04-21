@@ -59,35 +59,17 @@ public class CreateBookActivity extends AppCompatActivity {
         spinner.setAdapter(themesAdapter);
 
 
-        btCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createBookCheck();
-            }
-        });
+        btCreate.setOnClickListener(v -> createBookCheck());
 
-        btCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cleanForm();
-            }
-        });
+        btCancel.setOnClickListener(v -> cleanForm());
 
-        btMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-            }
-        });
+        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
 
-        tvLogut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedResources.getInstance(getApplicationContext()).logOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
+        tvLogut.setOnClickListener(v -> {
+            SharedResources.getInstance(getApplicationContext()).logOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
     }
 
@@ -146,15 +128,15 @@ public class CreateBookActivity extends AppCompatActivity {
                 .createService(WebServiceApi.class)
                 .createBook(book, authHeader);
 
-        call.enqueue(new Callback<Book>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if(response.code() == 201){
+                if (response.code() == 201) {
                     Toast.makeText(CreateBookActivity.this, "El libro se ha creado correctamente", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Libro creado " + " id " + response.body().getId()
                             + " email: " + response.body().getTitle());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }

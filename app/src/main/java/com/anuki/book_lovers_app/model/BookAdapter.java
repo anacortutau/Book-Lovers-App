@@ -46,12 +46,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
 
         holder.author.setText(author);
         holder.title.setText(title);
-        holder.imageMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickedItem.ClickedBook(book);
-            }
-        });
+        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedBook(book));
 
     }
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,19 +48,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-        btSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userSignUp();
-            }
-        });
+        btSignUp.setOnClickListener(v -> userSignUp());
 
-        tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            }
-        });
+        tvLogin.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
     }
 
     private void userSignUp(){
@@ -111,15 +100,15 @@ public class SignUpActivity extends AppCompatActivity {
                 .getInstance()
                 .createService(WebServiceApi.class)
                 .registrarUsuario(user);
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code() == 201){
+                if (response.code() == 201) {
                     Log.d("TAG1", "Usuario guardado correctamente");
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                }else if(response.code()==409){
+                } else if (response.code() == 409) {
                     Log.d("TAG1", "El Usuario ya existe");
-                }else{
+                } else {
                     Log.d("TAG1", "error no definido");
                 }
             }

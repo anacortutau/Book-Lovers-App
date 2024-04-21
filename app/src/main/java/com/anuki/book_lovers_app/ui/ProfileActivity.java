@@ -31,11 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
         userName.setText(user.getNombre());
         email.setText(user.getEmail());
 
-        btMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-            }
-        });
+        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
     }
 }

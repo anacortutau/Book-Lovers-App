@@ -54,22 +54,22 @@ public class ListComicActivity extends AppCompatActivity implements ComicAdapter
                 .createService(WebServiceApi.class)
                 .getAllComic(authHeader);
 
-        comiclist.enqueue(new Callback<List<Comic>>() {
+        comiclist.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Comic>> call, Response<List<Comic>> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     List<Comic> comicResponse = response.body();
                     Log.d("TAG1", "Lista de comics " + response.body().toString());
                     comicAdapter.setData(comicResponse);
                     recyclerView.setAdapter(comicAdapter);
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Comic>> call, Throwable t) {
-                Log.e("failure",t.getLocalizedMessage());
+                Log.e("failure", t.getLocalizedMessage());
 
             }
         });

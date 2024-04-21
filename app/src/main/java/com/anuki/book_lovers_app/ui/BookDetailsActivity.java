@@ -54,19 +54,9 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         }
 
-        btComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("book", book));
-            }
-        });
+        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("book", book)));
 
-        btListComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ListCommentsBooksActivity.class).putExtra("book", book));
-            }
-        });
+        btListComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListCommentsBooksActivity.class).putExtra("book", book)));
 
     }
 
