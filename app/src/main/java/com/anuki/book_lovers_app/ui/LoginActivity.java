@@ -3,6 +3,7 @@ package com.anuki.book_lovers_app.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(){
         Call<User> call = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
                 .login(user);
 
@@ -87,11 +88,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
-                    Log.d("TAG1", "Usuario logeado " + " id " + response.body().getId()
-                            + " email: " + response.body().getEmail());
-                    SharedResources.getInstance(getApplicationContext())
-                            .saveUser(response.body());
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    User user = response.body();
+                    if (user != null) {
+                        Log.d("TAG1", "Usuario logeado " + " id " + user.getId() + " email: " + user.getEmail());
+                        Log.d("LoginResponse", "Token saved: " + user.getToken());
+                        saveUserAndToken(user);
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    }
                 } else if (response.code() == 404) {
                     Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Usuario no existe");
@@ -105,5 +108,16 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveUserAndToken(User user) {
+        SharedPreferences sharedPreferences = getSharedPreferences("appPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("USER_ID", user.getId());
+        editor.putString("USER_NAME", user.getNombre());
+        editor.putString("USER_EMAIL", user.getEmail());
+        editor.putString("TOKEN", user.getToken());
+        editor.apply();
+        Log.d("SharedResources", "Token saved: " + user.getToken());
     }
 }

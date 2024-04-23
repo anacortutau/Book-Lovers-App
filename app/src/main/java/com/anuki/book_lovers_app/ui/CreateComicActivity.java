@@ -119,13 +119,11 @@ public class CreateComicActivity extends AppCompatActivity {
     }
 
     private void createComic() {
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
 
         Call<Comic> call = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
-                .createComic(comic, authHeader);
+                .createComic(comic);
 
         call.enqueue(new Callback<Comic>() {
             @Override

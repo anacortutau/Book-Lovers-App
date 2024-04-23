@@ -53,13 +53,10 @@ public class ListCommentsComicsActivity extends AppCompatActivity implements Com
 
     public void getAllCommentsById(Integer id){
 
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
-
         Call<List<Comment>> commentList = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
-                .getAllCommentsByComicId(authHeader, id);
+                .getAllCommentsByComicId(id);
 
         commentList.enqueue(new Callback<>() {
             @Override

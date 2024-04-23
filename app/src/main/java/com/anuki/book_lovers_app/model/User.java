@@ -12,7 +12,7 @@ public class User {
     private String email;
     @SerializedName("password")
     private String password;
-    @SerializedName("accessToken")
+    @SerializedName("token")
     private String token;
 
     public User(){

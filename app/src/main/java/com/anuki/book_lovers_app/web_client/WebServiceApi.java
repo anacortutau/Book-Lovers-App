@@ -26,35 +26,34 @@ public interface WebServiceApi {
     @POST("book-lovers/auth/sign-in")
     Call<User> login(@Body User user);
 
-
     /*
     LIBROS
      */
     @POST("/book-lovers/books")
-    Call<Book> createBook(@Body Book book, @Header("Authorization")String authHeader);
+    Call<Book> createBook(@Body Book book);
 
     @GET("/book-lovers/books")
-    Call<List<Book>> getAllBook(@Header("Authorization")String authHeader);
+    Call<List<Book>> getAllBooks();
 
     @GET("/book-lovers/books/{id}/comments")
-    Call<List<Comment>> getAllCommentsByBookId(@Header("Authorization")String authHeader, @Path("id") Integer id );
+    Call<List<Comment>> getAllCommentsByBookId(@Path("id") Integer id);
 
     @POST("/book-lovers/books/{id}/comments")
-    Call<Comment> createCommentBook(@Body Comment comment, @Header("Authorization")String authHeader, @Path("id") Integer id );
+    Call<Comment> createCommentBook(@Body Comment comment, @Path("id") Integer id);
 
-     /*
+    /*
     COMICS
      */
     @POST("/book-lovers/comics")
-    Call<Comic> createComic (@Body Comic comic, @Header("Authorization") String authHeader);
+    Call<Comic> createComic(@Body Comic comic);
 
     @GET("/book-lovers/comics")
-    Call<List<Comic>> getAllComic(@Header("Authorization")String authHeader);
+    Call<List<Comic>> getAllComics();
 
     @GET("/book-lovers/comics/{id}/comments")
-    Call<List<Comment>> getAllCommentsByComicId(@Header("Authorization")String authHeader, @Path("id") Integer id );
+    Call<List<Comment>> getAllCommentsByComicId(@Path("id") Integer id);
 
     @POST("/book-lovers/comics/{id}/comments")
-    Call<Comment> createCommentComic(@Body Comment comment, @Header("Authorization")String authHeader, @Path("id") Integer id );
+    Call<Comment> createCommentComic(@Body Comment comment, @Path("id") Integer id);
 
 }

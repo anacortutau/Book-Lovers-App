@@ -120,13 +120,11 @@ public class CreateBookActivity extends AppCompatActivity {
     }
 
     private void createBook() {
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
 
         Call<Book> call = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
-                .createBook(book, authHeader);
+                .createBook(book);
 
         call.enqueue(new Callback<>() {
             @Override

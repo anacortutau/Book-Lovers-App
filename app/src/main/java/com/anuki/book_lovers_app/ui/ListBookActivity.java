@@ -46,13 +46,10 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
 
     public void getAllBooks(){
 
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
-
         Call<List<Book>> booklist = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
-                .getAllBook(authHeader);
+                .getAllBooks();
 
         booklist.enqueue(new Callback<>() {
             @Override

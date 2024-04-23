@@ -102,17 +102,15 @@ public class CreateCommentActivity extends AppCompatActivity {
 
 
     private void createCommentBook() {
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
             book = (Book) intent.getSerializableExtra("book");
 
             Call<Comment> call = WebService
-                    .getInstance()
+                    .getInstance(this)
                     .createService(WebServiceApi.class)
-                    .createCommentBook(comment, authHeader, book.getId());
+                    .createCommentBook(comment, book.getId());
 
 
             call.enqueue(new Callback<>() {
@@ -138,17 +136,15 @@ public class CreateCommentActivity extends AppCompatActivity {
     }
 
     private void createCommentComic() {
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
             comic = (Comic) intent.getSerializableExtra("comic");
 
             Call<Comment> call = WebService
-                    .getInstance()
+                    .getInstance(this)
                     .createService(WebServiceApi.class)
-                    .createCommentComic(comment, authHeader, comic.getId());
+                    .createCommentComic(comment, comic.getId());
 
 
             call.enqueue(new Callback<Comment>() {

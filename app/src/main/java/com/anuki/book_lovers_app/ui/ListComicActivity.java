@@ -46,13 +46,10 @@ public class ListComicActivity extends AppCompatActivity implements ComicAdapter
 
     public void getAllComics(){
 
-        String token = SharedResources.getInstance(getApplicationContext()).getUser().getToken();
-        String authHeader = "Bearer " + token;
-
         Call<List<Comic>> comiclist = WebService
-                .getInstance()
+                .getInstance(this)
                 .createService(WebServiceApi.class)
-                .getAllComic(authHeader);
+                .getAllComics();
 
         comiclist.enqueue(new Callback<>() {
             @Override
