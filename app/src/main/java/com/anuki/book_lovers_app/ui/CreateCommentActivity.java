@@ -117,7 +117,6 @@ public class CreateCommentActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
                     if (response.code() == 201) {
-
                         Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
                         Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
                                 + " titulo: " + response.body().getTitle());
@@ -147,16 +146,16 @@ public class CreateCommentActivity extends AppCompatActivity {
                     .createCommentComic(comment, comic.getId());
 
 
-            call.enqueue(new Callback<Comment>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
-                    if(response.code() == 201){
+                    if (response.code() == 201) {
 
                         Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
                         Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
                                 + " titulo: " + response.body().getTitle());
                         startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
-                    }else{
+                    } else {
                         Log.d("TAG1", "Error Desconocido");
                     }
                 }

@@ -93,11 +93,15 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("TAG1", "Usuario logeado " + " id " + user.getId() + " email: " + user.getEmail());
                         Log.d("LoginResponse", "Token saved: " + user.getToken());
                         saveUserAndToken(user);
+                        Toast.makeText(LoginActivity.this, "Usuario logado correctamente", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                     }
                 } else if (response.code() == 404) {
                     Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Usuario no existe");
+                } else if (response.code() == 403) {
+                    Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
+                    Log.d("TAG1", "El usuario o contraseña son incorrectos");
                 } else {
                     Log.d("TAG1", "Error Desconocido");
                 }

@@ -42,7 +42,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
         Comment comment = commentList.get(position);
 
         String title = comment.getTitle();
-        String userName = comment.getUserName();
+        String userName = comment.getUser().getNombre();
 
         holder.useNameText.setText(userName);
         holder.title.setText(title);

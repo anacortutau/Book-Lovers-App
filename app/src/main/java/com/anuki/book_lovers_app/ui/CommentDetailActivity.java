@@ -39,7 +39,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             comment = (Comment) intent.getSerializableExtra("comment");
             String titleData = comment.getTitle();
             String noteData = comment.getNote().toString();
-            String userData = comment.getUserName();
+            String userData = comment.getUser().getNombre();
             String commentData = comment.getComment();
             note.setText(noteData);
             title.setText(titleData);

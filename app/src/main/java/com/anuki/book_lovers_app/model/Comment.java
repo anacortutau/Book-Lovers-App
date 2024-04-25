@@ -10,8 +10,8 @@ public class Comment implements Serializable {
     private Integer id;
     @SerializedName("title")
     private String title;
-    @SerializedName("userName")
-    private String userName;
+    @SerializedName("userEntity")
+    private User user;
     @SerializedName("comment")
     private String comment;
     @SerializedName("note")
@@ -20,10 +20,10 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(Integer id, String title, String userName, String comment, Integer note) {
+    public Comment(Integer id, String title, User user, String comment, Integer note) {
         this.id = id;
         this.title = title;
-        this.userName = userName;
+        this.user = user;
         this.comment = comment;
         this.note = note;
     }
@@ -44,12 +44,12 @@ public class Comment implements Serializable {
         this.title = title;
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getComment() {
