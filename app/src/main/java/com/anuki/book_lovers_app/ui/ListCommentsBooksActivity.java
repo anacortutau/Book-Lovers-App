@@ -14,7 +14,6 @@ import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.model.CommentAdapter;
-import com.anuki.book_lovers_app.shared.SharedResources;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
@@ -34,7 +33,7 @@ public class ListCommentsBooksActivity extends AppCompatActivity implements Comm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_comments);
+        setContentView(R.layout.activity_list_comments_books);
 
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerviewComment);

@@ -25,7 +25,7 @@ public class CommentDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_detail);
+        setContentView(R.layout.activity_comment_book_detail);
 
         title = findViewById(R.id.titleText);
         user = findViewById(R.id.userText);

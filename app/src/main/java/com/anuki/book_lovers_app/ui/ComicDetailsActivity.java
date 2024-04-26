@@ -37,8 +37,8 @@ public class ComicDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comic_details);
 
         rating = findViewById(R.id.ratingStars);
-        title = findViewById(R.id.titleComicText);
-        author = findViewById(R.id.authorComicText);
+        title = findViewById(R.id.titleText);
+        author = findViewById(R.id.authorText);
         sinopsis = findViewById(R.id.sinopsisText);
         theme = findViewById(R.id.themeText);
         btComment = findViewById(R.id.btComment);

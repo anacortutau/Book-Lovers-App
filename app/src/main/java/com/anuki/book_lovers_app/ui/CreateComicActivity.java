@@ -47,7 +47,7 @@ public class CreateComicActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
         etSinopsis = findViewById(R.id.etSinopsis);
-        btCreate = findViewById(R.id.btCreateBook);
+        btCreate = findViewById(R.id.btCreateComic);
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
         tvLogut = findViewById(R.id.tvLogout);

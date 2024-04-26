@@ -1,19 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context=".ui.CommentComicDetailActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+    tools:context=".ui.CommentDetailActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:padding="20dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/titleComment"/>
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:text="title"
+                android:padding="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/userName"/>
+            <TextView
+                android:id="@+id/userText"
+                android:layout_width="match_parent"
+                android:text="user"
+                android:padding="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comment"/>
+            <TextView
+                android:id="@+id/commentText"
+                android:layout_width="match_parent"
+                android:text="comment"
+                android:padding="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/note"/>
+            <TextView
+                android:id="@+id/noteTextComment"
+                android:layout_width="match_parent"
+                android:text="Note"
+                android:padding="10dp"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btReturnToComicDetail"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/returnToComicDetail"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btMenu"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/menuPrincipal"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

@@ -67,8 +67,8 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapter
 
         public ComicAdapterVH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.titleComicText);
-            author = itemView.findViewById(R.id.authorComicText);
+            title = itemView.findViewById(R.id.titleText);
+            author = itemView.findViewById(R.id.authorText);
             /*imageMore = itemView.findViewById(R.id.imageMoreComic);*/
 
 
