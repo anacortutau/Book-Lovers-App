@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateCommentActivity extends AppCompatActivity {
+public class CreateBookCommentActivity extends AppCompatActivity {
 
     private EditText etTitle;
     private EditText etComment;
@@ -30,8 +30,6 @@ public class CreateCommentActivity extends AppCompatActivity {
     private Button btMenu;
     private Comment comment;
     private Book book;
-
-    private Comic comic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +111,7 @@ public class CreateCommentActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
                     if (response.code() == 201) {
-                        Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateBookCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
                         Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
                                 + " titulo: " + response.body().getTitle());
                         startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("book", book));
@@ -130,37 +128,4 @@ public class CreateCommentActivity extends AppCompatActivity {
         }
     }
 
-    private void createCommentComic() {
-
-        Intent intent = getIntent();
-        if(intent.getExtras() !=null){
-            comic = (Comic) intent.getSerializableExtra("comic");
-
-            Call<Comment> call = WebService
-                    .getInstance(this)
-                    .createService(WebServiceApi.class)
-                    .createCommentComic(comment, comic.getId());
-
-
-            call.enqueue(new Callback<>() {
-                @Override
-                public void onResponse(Call<Comment> call, Response<Comment> response) {
-                    if (response.code() == 201) {
-
-                        Toast.makeText(CreateCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
-                        Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
-                                + " titulo: " + response.body().getTitle());
-                        startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
-                    } else {
-                        Log.d("TAG1", "Error Desconocido");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Comment> call, Throwable t) {
-                    Log.d("TAG1", "Error Desconocido");
-                }
-            });
-        }
-    }
 }

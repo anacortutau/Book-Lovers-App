@@ -132,7 +132,7 @@ public class CreateBookActivity extends AppCompatActivity {
                     Toast.makeText(CreateBookActivity.this, "El libro se ha creado correctamente", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Libro creado " + " id " + response.body().getId()
                             + " email: " + response.body().getTitle());
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ListBookActivity.class));
                 } else {
                     Log.d("TAG1", "Error Desconocido");
                 }

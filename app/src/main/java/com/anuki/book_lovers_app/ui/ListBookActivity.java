@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,11 +24,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListBookActivity extends AppCompatActivity implements BookAdapter.ClickedItem {
+public class ListBookActivity extends AppCompatActivity implements BookAdapter.ClickedItem, SwipeRefreshLayout.OnRefreshListener {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     BookAdapter bookAdapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +38,18 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
 
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerview);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         bookAdapter = new BookAdapter(this::ClickedBook);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         getAllBooks();
     }
 
-    public void getAllBooks(){
+    public void getAllBooks() {
 
         Call<List<Book>> booklist = WebService
                 .getInstance(this)
@@ -62,18 +67,24 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
                 } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<List<Book>> call, Throwable t) {
                 Log.e("failure", t.getLocalizedMessage());
-
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     @Override
     public void ClickedBook(Book book) {
-        startActivity(new Intent(this,BookDetailsActivity.class).putExtra("book", book));
+        startActivity(new Intent(this, BookDetailsActivity.class).putExtra("book", book));
+    }
+
+    @Override
+    public void onRefresh() {
+        getAllBooks();
     }
 }

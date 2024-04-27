@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ui.CreateCommentActivity">
+    tools:context=".ui.CreateBookCommentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -60,7 +60,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
 
         }
 
-        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("comic", comic)));
+        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateBookCommentActivity.class).putExtra("comic", comic)));
 
         btListComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListCommentsComicsActivity.class).putExtra("comic", comic)));
     }

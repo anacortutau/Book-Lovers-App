@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -54,7 +53,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         }
 
-        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateCommentActivity.class).putExtra("book", book)));
+        btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateBookCommentActivity.class).putExtra("book", book)));
 
         btListComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListCommentsBooksActivity.class).putExtra("book", book)));
 
