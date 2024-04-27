@@ -7,7 +7,6 @@ import android.widget.RatingBar;
 import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Comic;
 

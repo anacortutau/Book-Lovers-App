@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,11 +13,8 @@ import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
-import com.anuki.book_lovers_app.shared.SharedResources;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

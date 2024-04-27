@@ -30,8 +30,8 @@
     <string name="createComic">Crear Comic</string>
     <string name="listBooks">Ver Libros</string>
     <string name="listComics">Ver Comics</string>
-    <string name="title">Titulo</string>
-    <string name="author">Autor</string>
+    <string name="title">Comentario</string>
+    <string name="author">Usuario</string>
     <string name="sinopsis">Sinopsis</string>
     <string name="theme">Tema</string>
     <string name="cancel">Cancel</string>
@@ -51,6 +51,7 @@
     <string name="list_comments">Lista de Comentarios</string>
     <string name="titleComment">Titulo del Comentario</string>
     <string name="userName">Usuario</string>
+    <string name="rating">rating</string>
 
     <string-array name="themes">
         <item>TERROR</item>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
     @Override
     public CommentAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new CommentAdapter.CommentAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_comment,parent,false));
+        View itemView = LayoutInflater.from(context).inflate(R.layout.comment_row_layout, parent, false);
+        return new CommentAdapterVH(itemView);
     }
 
     @Override
@@ -41,17 +43,30 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
 
         Comment comment = commentList.get(position);
 
-        String title = comment.getTitle();
         String userName = comment.getUser().getNombre();
+        String title = comment.getTitle();
+        Integer note = comment.getNote();
+        String commentPreview;
+        if (comment.getComment().length() <= 30) {
+            commentPreview = comment.getComment();
+        } else {
+            commentPreview = comment.getComment().substring(0, 30) + "...";
+        }
+
+        if (note != null) {
+            float normalizedRating = note / 10.0f * 5.0f;
+            holder.ratingBar.setProgress((int) Math.ceil(normalizedRating));
+        }
 
         holder.useNameText.setText(userName);
-        holder.title.setText(title);
+        holder.titleText.setText(title);
+        holder.commentPreviewText.setText(commentPreview);
         holder.imageMore.setOnClickListener(view -> clickedItem.ClickedComment(comment));
 
     }
 
-    public interface ClickedItem{
-        public void ClickedComment(Comment comment);
+    public interface ClickedItem {
+        void ClickedComment(Comment comment);
     }
 
     @Override
@@ -61,15 +76,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
 
     public class CommentAdapterVH extends RecyclerView.ViewHolder {
 
-        TextView title;
+        TextView titleText;
         TextView useNameText;
+        TextView commentPreviewText;
         ImageView imageMore;
+        RatingBar ratingBar;
 
         public CommentAdapterVH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.titleText);
-            useNameText = itemView.findViewById(R.id.useNameText);
+            titleText = itemView.findViewById(R.id.titleText);
+            useNameText = itemView.findViewById(R.id.userNameText);
+            commentPreviewText = itemView.findViewById(R.id.commentPreviewText);
             imageMore = itemView.findViewById(R.id.imageMore);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
         }
     }
 }
+

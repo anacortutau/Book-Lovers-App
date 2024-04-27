@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.anuki.book_lovers_app.shared.SharedResources;
 
 import java.io.IOException;
@@ -18,6 +20,8 @@ public class BearerTokenInterceptor implements Interceptor {
     public BearerTokenInterceptor(Context context) {
         this.sharedResources = SharedResources.getInstance(context);
     }
+
+    @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();

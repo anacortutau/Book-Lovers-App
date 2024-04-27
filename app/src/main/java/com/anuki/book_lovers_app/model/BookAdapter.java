@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -43,12 +44,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
 
         String title = book.getTitle();
         String author = book.getAuthor();
+        Double note = book.getNote();
 
-        holder.author.setText(author);
-        holder.title.setText(title);
+        holder.authorText.setText(author);
+        holder.titleText.setText(title);
+
+        if (note != null) {
+            float normalizedRating = (float) (note * 5.0 / 10.0);
+            holder.ratingBar.setProgress(Math.round(normalizedRating));
+        }
+
         holder.imageMore.setOnClickListener(view -> clickedItem.ClickedBook(book));
 
     }
+
 
     public interface ClickedItem{
         public void ClickedBook(Book book);
@@ -61,14 +70,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
 
     public class BookAdapterVH extends RecyclerView.ViewHolder {
 
-        TextView title;
-        TextView author;
+        TextView titleText;
+        TextView authorText;
         ImageView imageMore;
+        RatingBar ratingBar;
 
         public BookAdapterVH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.titleText);
-            author = itemView.findViewById(R.id.authorText);
+            titleText = itemView.findViewById(R.id.titleText);
+            authorText = itemView.findViewById(R.id.authorText);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
             imageMore = itemView.findViewById(R.id.imageMore);
 
 
