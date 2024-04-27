@@ -17,11 +17,11 @@ public class BookDetailsActivity extends AppCompatActivity {
     TextView author;
     TextView theme;
     TextView sinopsis;
-    TextView note;
     RatingBar rating;
     Book book;
     Button btComment;
     Button btListComment;
+    Button mainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         theme = findViewById(R.id.themeText);
         btComment = findViewById(R.id.btComment);
         btListComment = findViewById(R.id.btListComments);
+        mainMenu = findViewById(R.id.btGoToMainMenu);
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
@@ -45,7 +46,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             String sinopsisData = book.getSinopsis();
             String themeData = book.getTheme();
 
-            rating.setRating(book.getNote().floatValue());
+            rating.setRating(book.getNote().floatValue() / 2.0f);
             title.setText(titleData);
             author.setText(authorData);
             theme.setText(themeData);
@@ -56,6 +57,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         btComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateBookCommentActivity.class).putExtra("book", book)));
 
         btListComment.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ListCommentsBooksActivity.class).putExtra("book", book)));
+
+        mainMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
 
     }
 

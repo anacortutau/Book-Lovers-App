@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
-                android:numStars="10"
+                android:numStars="5"
                 android:stepSize="1"
                 android:isIndicator="true" />
 
@@ -102,6 +102,15 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/gradient_bt"
                 android:text="@string/list_comments"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btGoToMainMenu"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/menuPrincipal"
                 android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
