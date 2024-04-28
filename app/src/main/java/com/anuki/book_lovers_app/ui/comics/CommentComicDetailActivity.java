@@ -50,8 +50,11 @@ public class CommentComicDetailActivity extends AppCompatActivity {
             comment = (Comment) intent.getSerializableExtra("comment");
             if (comment != null) {
                 String titleData = comment.getTitle();
+                String userData = "";
                 String noteData = comment.getNote().toString();
-                String userData = comment.getUser().getNombre();
+                if (comment.getUser() != null) {
+                    userData = comment.getUser().getNombre();
+                }
                 String commentData = comment.getComment();
                 note.setText(noteData);
                 title.setText(titleData);

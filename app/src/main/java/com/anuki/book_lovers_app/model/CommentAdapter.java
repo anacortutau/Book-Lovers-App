@@ -75,7 +75,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentA
         }
 
         public void bind(Comment comment) {
-            String userName = comment.getUser().getNombre();
+            String userName = "";
+            if (comment.getUser() != null) {
+                userName = comment.getUser().getNombre();
+            }
             String title = comment.getTitle();
             Integer note = comment.getNote();
             String commentPreview = comment.getComment().length() <= 30 ? comment.getComment() : comment.getComment().substring(0, 30) + "...";
