@@ -1,6 +1,4 @@
-package com.anuki.book_lovers_app.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.anuki.book_lovers_app.ui.chapters;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +6,15 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
+import com.anuki.book_lovers_app.ui.books.CreateBookCommentActivity;
+import com.anuki.book_lovers_app.ui.books.ListCommentsBooksActivity;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 
-public class BookDetailsActivity extends AppCompatActivity {
+public class ChapterDetailsActivity extends AppCompatActivity {
 
     TextView title;
     TextView author;
@@ -46,7 +49,10 @@ public class BookDetailsActivity extends AppCompatActivity {
             String sinopsisData = book.getSinopsis();
             String themeData = book.getTheme();
 
-            rating.setRating(book.getNote().floatValue() / 2.0f);
+            if (book.getNote() != null) {
+                rating.setRating(book.getNote().floatValue() / 2.0f);
+            }
+
             title.setText(titleData);
             author.setText(authorData);
             theme.setText(themeData);

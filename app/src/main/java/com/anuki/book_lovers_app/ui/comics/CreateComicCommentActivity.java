@@ -1,4 +1,4 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.comics;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.anuki.book_lovers_app.R;
-import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
+import com.anuki.book_lovers_app.ui.books.BookDetailsActivity;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
@@ -99,7 +100,7 @@ public class CreateComicCommentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent.getExtras() !=null){
-            comic = (Comic) intent.getSerializableExtra("book");
+            comic = (Comic) intent.getSerializableExtra("comic");
 
             Call<Comment> call = WebService
                     .getInstance(this)

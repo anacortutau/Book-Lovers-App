@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
-    tools:context=".ui.ListCommentsBooksActivity">
+    tools:context=".ui.books.ListCommentsBooksActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,6 +18,12 @@
             android:gravity="center"
             android:layout_height="wrap_content" />
     </androidx.appcompat.widget.Toolbar>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@drawable/recyclerview_bg"
@@ -29,5 +35,6 @@
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

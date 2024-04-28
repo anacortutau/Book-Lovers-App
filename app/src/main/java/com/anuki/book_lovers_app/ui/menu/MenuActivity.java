@@ -1,15 +1,18 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.ui.comics.ComicsMenuActivity;
+import com.anuki.book_lovers_app.ui.books.BooksMenuActivity;
+import com.anuki.book_lovers_app.ui.login.LoginActivity;
+import com.anuki.book_lovers_app.ui.login.ProfileActivity;
 
 public class MenuActivity extends AppCompatActivity {
 

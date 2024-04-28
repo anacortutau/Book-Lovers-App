@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Comic implements Serializable{
+public class Chapter implements Serializable{
 
     @SerializedName("id")
     private Integer id;
@@ -27,11 +27,11 @@ public class Comic implements Serializable{
     @SerializedName("note")
     private Double note;
 
-    public Comic(){
+    public Chapter(){
 
     }
 
-    public Comic(Integer id, String title, String writter, String drawer, String sinopsis, String theme, Double note) {
+    public Chapter(Integer id, String title, String writter, String drawer, String sinopsis, String theme, Double note) {
         this.id = id;
         this.title = title;
         this.author = writter;

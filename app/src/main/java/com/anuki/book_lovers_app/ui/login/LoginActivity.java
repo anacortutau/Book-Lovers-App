@@ -1,4 +1,4 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +13,8 @@ import android.widget.Toast;
 
 import com.anuki.book_lovers_app.model.User;
 import com.anuki.book_lovers_app.R;
-import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.service.UserService;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
@@ -29,24 +29,28 @@ public class LoginActivity extends AppCompatActivity {
     private Button btLogin;
     private TextView tvSignUp;
 
-    private User user;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setUpView();
+        initializeViews();
+        configureListeners();
+
+        userService = new UserService(this);
     }
 
-    private void setUpView(){
+    private void initializeViews(){
         etUserName = findViewById(R.id.etName);
         etPassword = findViewById(R.id.etPassword);
         btLogin = findViewById(R.id.btLogin);
         tvSignUp = findViewById(R.id.tvSignUp);
+    }
 
+    private void configureListeners(){
         btLogin.setOnClickListener(v -> userLogin());
-
         tvSignUp.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
     }
 
@@ -72,44 +76,24 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        user = new User();
+        User user = new User();
         user.setNombre(userName);
         user.setPassword(password);
-        login();
+        login(user);
     }
 
-    private void login(){
-        Call<User> call = WebService
-                .getInstance(this)
-                .createService(WebServiceApi.class)
-                .login(user);
-
-        call.enqueue(new Callback<>() {
+    private void login(User user){
+        userService.login(user, new UserService.UserLoginCallback() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 200) {
-                    User user = response.body();
-                    if (user != null) {
-                        Log.d("TAG1", "Usuario logeado " + " id " + user.getId() + " email: " + user.getEmail());
-                        Log.d("LoginResponse", "Token saved: " + user.getToken());
-                        saveUserAndToken(user);
-                        Toast.makeText(LoginActivity.this, "Usuario logado correctamente", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                    }
-                } else if (response.code() == 404) {
-                    Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
-                    Log.d("TAG1", "Usuario no existe");
-                } else if (response.code() == 403) {
-                    Toast.makeText(LoginActivity.this, "El usuario o contraseña son incorrectos", Toast.LENGTH_LONG).show();
-                    Log.d("TAG1", "El usuario o contraseña son incorrectos");
-                } else {
-                    Log.d("TAG1", "Error Desconocido");
-                }
+            public void onSuccess(User user) {
+                saveUserAndToken(user);
+                Toast.makeText(LoginActivity.this, "Usuario logado correctamente", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
+            public void onError(String message) {
+                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });
     }

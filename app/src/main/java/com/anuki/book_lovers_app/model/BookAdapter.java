@@ -15,14 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.anuki.book_lovers_app.R;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private List<Book> bookList;
-    private Context context;
-    private ClickedItem clickedItem;
+    private final Context context;
+    private final ClickedItem clickedItem;
 
     public BookAdapter(ClickedItem clickedItem) {
         this.clickedItem = clickedItem;
+        this.context = clickedItem instanceof Context ? (Context) clickedItem : null;
     }
 
     public void setData(List<Book> bookList) {
@@ -32,57 +33,58 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVH>
 
     @NonNull
     @Override
-    public BookAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
-        return new BookAdapter.BookAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_book,parent,false));
+    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_book, parent, false);
+        return new BookViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookAdapterVH holder, int position) {
-
-        Book book = bookList.get(position);
-
-        String title = book.getTitle();
-        String author = book.getAuthor();
-        Double note = book.getNote();
-
-        holder.authorText.setText(author);
-        holder.titleText.setText(title);
-
-        if (note != null) {
-            float normalizedRating = (float) (note * 5.0 / 10.0);
-            holder.ratingBar.setProgress(Math.round(normalizedRating));
+    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+        if (bookList != null && position < bookList.size()) {
+            holder.bind(bookList.get(position));
         }
-
-        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedBook(book));
-
-    }
-
-
-    public interface ClickedItem{
-        public void ClickedBook(Book book);
     }
 
     @Override
     public int getItemCount() {
-        return bookList.size();
+        return bookList != null ? bookList.size() : 0;
     }
 
-    public class BookAdapterVH extends RecyclerView.ViewHolder {
+    public class BookViewHolder extends RecyclerView.ViewHolder {
 
-        TextView titleText;
-        TextView authorText;
-        ImageView imageMore;
-        RatingBar ratingBar;
+        private final TextView titleText;
+        private final TextView authorText;
+        private final ImageView imageMore;
+        private final RatingBar ratingBar;
 
-        public BookAdapterVH(@NonNull View itemView) {
+        public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.titleText);
             authorText = itemView.findViewById(R.id.authorText);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             imageMore = itemView.findViewById(R.id.imageMore);
 
-
+            imageMore.setOnClickListener(view -> {
+                int position = getBindingAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && clickedItem != null) {
+                    clickedItem.ClickedBook(bookList.get(position));
+                }
+            });
         }
+
+        public void bind(Book book) {
+            titleText.setText(book.getTitle());
+            authorText.setText(book.getAuthor());
+
+            Double note = book.getNote();
+            if (note != null) {
+                float normalizedRating = (float) (note * 5.0 / 10.0);
+                ratingBar.setProgress(Math.round(normalizedRating));
+            }
+        }
+    }
+
+    public interface ClickedItem {
+        void ClickedBook(Book book);
     }
 }

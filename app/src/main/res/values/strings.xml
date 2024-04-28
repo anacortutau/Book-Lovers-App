@@ -31,7 +31,7 @@
     <string name="listBooks">Ver Libros</string>
     <string name="listComics">Ver Comics</string>
     <string name="title">Comentario</string>
-    <string name="author">Usuario</string>
+    <string name="author">Autor</string>
     <string name="sinopsis">Sinopsis</string>
     <string name="theme">Tema</string>
     <string name="cancel">Cancel</string>
@@ -52,6 +52,8 @@
     <string name="titleComment">Titulo del Comentario</string>
     <string name="userName">Usuario</string>
     <string name="rating">rating</string>
+    <string name="chapters">Crear Capitulo</string>
+    <string name="listChapters">Listar Capitulos</string>
 
     <string-array name="themes">
         <item>TERROR</item>

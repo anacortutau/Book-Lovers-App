@@ -1,4 +1,4 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.books;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,70 +9,68 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.BookAdapter;
-import com.anuki.book_lovers_app.shared.SharedResources;
-import com.anuki.book_lovers_app.web_client.WebService;
-import com.anuki.book_lovers_app.web_client.WebServiceApi;
+import com.anuki.book_lovers_app.service.BookService;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ListBookActivity extends AppCompatActivity implements BookAdapter.ClickedItem, SwipeRefreshLayout.OnRefreshListener {
 
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    BookAdapter bookAdapter;
-    SwipeRefreshLayout swipeRefreshLayout;
+    private Toolbar toolbar;
+    private RecyclerView recyclerView;
+    private BookAdapter bookAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private BookService bookService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_book);
 
-        toolbar = findViewById(R.id.toolbar);
-        recyclerView = findViewById(R.id.recyclerview);
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        initializeViews();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        configureRecyclerView();
 
-        bookAdapter = new BookAdapter(this::ClickedBook);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        configureSwipeRefreshLayout();
+
+        bookService = new BookService(this);
 
         getAllBooks();
     }
 
-    public void getAllBooks() {
+    private void initializeViews() {
+        toolbar = findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recyclerview);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+    }
 
-        Call<List<Book>> booklist = WebService
-                .getInstance(this)
-                .createService(WebServiceApi.class)
-                .getAllBooks();
+    private void configureRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        bookAdapter = new BookAdapter(this::ClickedBook);
+        recyclerView.setAdapter(bookAdapter);
+    }
 
-        booklist.enqueue(new Callback<>() {
+    private void configureSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    private void getAllBooks() {
+        bookService.getAllBooks(new BookService.BookCallback() {
             @Override
-            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-                if (response.code() == 200) {
-                    List<Book> bookResponse = response.body();
-                    Log.d("TAG1", "Lista de libros " + response.body().toString());
-                    bookAdapter.setData(bookResponse);
-                    recyclerView.setAdapter(bookAdapter);
-                } else {
-                    Log.d("TAG1", "Error Desconocido");
-                }
+            public void onSuccess(List<Book> books) {
+                bookAdapter.setData(books);
+                recyclerView.setAdapter(bookAdapter);
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<List<Book>> call, Throwable t) {
-                Log.e("failure", t.getLocalizedMessage());
+            public void onError(String message) {
+                Toast.makeText(ListBookActivity.this, message, Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

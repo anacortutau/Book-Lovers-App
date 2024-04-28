@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="ui.BookDetailsActivity">
+    tools:context=".ui.books.BookDetailsActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -102,6 +102,24 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/gradient_bt"
                 android:text="@string/list_comments"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btCreateChapter"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/chapters"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btListChapters"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/gradient_bt"
+                android:text="@string/listChapters"
                 android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

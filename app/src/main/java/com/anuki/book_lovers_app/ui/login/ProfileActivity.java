@@ -1,13 +1,13 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.User;
 import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 

@@ -8,14 +8,14 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anuki.book_lovers_app.R;
 
-public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapterVH>{
+import java.util.List;
+
+public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ComicAdapterVH>{
 
     private List<Comic> comicList;
 
@@ -23,7 +23,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapter
 
     private ClickedItem clickedItem;
 
-    public ComicAdapter(ClickedItem clickedItem) {this.clickedItem = clickedItem;}
+    public ChapterAdapter(ClickedItem clickedItem) {this.clickedItem = clickedItem;}
 
     public void setData (List<Comic> comicList){
         this.comicList = comicList;
@@ -34,11 +34,11 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapter
     @Override
     public ComicAdapterVH onCreateViewHolder (@NonNull ViewGroup parent, int viewType){
         context = parent.getContext();
-        return new ComicAdapter.ComicAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_comic, parent, false));
+        return new ChapterAdapter.ComicAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_comic, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ComicAdapter.ComicAdapterVH holder, int position) {
+    public void onBindViewHolder(@NonNull ChapterAdapter.ComicAdapterVH holder, int position) {
 
         Comic comic = comicList.get(position);
 

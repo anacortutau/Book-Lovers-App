@@ -1,4 +1,4 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.User;
 import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
@@ -114,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void navigateToLogin(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
-        finish(); // Finaliza esta actividad para evitar regresar a ella con el botón atrás.
+        finish();
     }
 
     @Override
@@ -123,7 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(SharedResources.getInstance(this).isLoggedIn()){
             Log.d("TAG1", "Usuario logado, enviando a Menu Activity");
             startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-            finish(); // Finaliza esta actividad para evitar regresar a ella.
+            finish();
         }
     }
 }

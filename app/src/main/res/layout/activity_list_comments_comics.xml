@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
-    tools:context=".ui.ListCommentsComicsActivity">
+    tools:context=".ui.comics.ListCommentsComicsActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

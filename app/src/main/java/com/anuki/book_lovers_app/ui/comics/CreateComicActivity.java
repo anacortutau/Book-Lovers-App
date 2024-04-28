@@ -1,4 +1,4 @@
-package com.anuki.book_lovers_app.ui;
+package com.anuki.book_lovers_app.ui.comics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.ui.login.LoginActivity;
+import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
@@ -30,7 +32,7 @@ public class CreateComicActivity extends AppCompatActivity {
     private Button btCreate;
     private Button btCancel;
     private Button btMenu;
-    private TextView tvLogut;
+    private TextView tvLogout;
     private Spinner spinner;
     private Comic comic;
 
@@ -39,36 +41,43 @@ public class CreateComicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_comic);
 
+        // Configurar vistas y botones
         setUpView();
     }
 
     private void setUpView() {
+        // Inicializar vistas
+        initializeViews();
+
+        // Configurar spinner de temas
+        setupThemeSpinner();
+
+        // Configurar botones
+        configureButtons();
+    }
+
+    private void initializeViews() {
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
         etSinopsis = findViewById(R.id.etSinopsis);
         btCreate = findViewById(R.id.btCreateComic);
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
-        tvLogut = findViewById(R.id.tvLogout);
+        tvLogout = findViewById(R.id.tvLogout);
         spinner = findViewById(R.id.spinner);
+    }
 
+    private void setupThemeSpinner() {
         String[] themes = {"Select a Theme", "MYSTERY", "TERROR", "ADVENTURE", "ROMANCE", "HISTORY", "FANTASY"};
-        ArrayAdapter <String> themesAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, themes);
+        ArrayAdapter<String> themesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes);
         spinner.setAdapter(themesAdapter);
+    }
 
+    private void configureButtons() {
         btCreate.setOnClickListener(v -> createComicCheck());
-
         btCancel.setOnClickListener(v -> cleanForm());
-
-        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
-
-        tvLogut.setOnClickListener(v -> {
-            SharedResources.getInstance(getApplicationContext()).logOut();
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        });
+        btMenu.setOnClickListener(v -> openMenuActivity());
+        tvLogout.setOnClickListener(v -> logOut());
     }
 
     private void cleanForm() {
@@ -124,19 +133,18 @@ public class CreateComicActivity extends AppCompatActivity {
                 .createService(WebServiceApi.class)
                 .createComic(comic);
 
-        call.enqueue(new Callback<Comic>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Comic> call, Response<Comic> response) {
-                if(response.code() == 201){
+                if (response.code() == 201) {
                     Toast.makeText(CreateComicActivity.this, "El comic se ha creado correctamente", Toast.LENGTH_LONG).show();
                     Log.d("TAG1", "Comic creado " + " id " + response.body().getId()
                             + " email: " + response.body().getTitle());
                     startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                }else{
+                } else {
                     Log.d("TAG1", "Error Desconocido");
                 }
             }
-
             @Override
             public void onFailure(Call<Comic> call, Throwable t) {
                 Log.d("TAG1", "Error Desconocido");
@@ -145,5 +153,14 @@ public class CreateComicActivity extends AppCompatActivity {
 
     }
 
-
+    private void openMenuActivity() {
+        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
     }
+
+    private void logOut() {
+        SharedResources.getInstance(getApplicationContext()).logOut();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+}
