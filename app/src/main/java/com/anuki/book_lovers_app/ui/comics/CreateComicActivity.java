@@ -41,18 +41,14 @@ public class CreateComicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_comic);
 
-        // Configurar vistas y botones
         setUpView();
     }
 
     private void setUpView() {
-        // Inicializar vistas
         initializeViews();
 
-        // Configurar spinner de temas
         setupThemeSpinner();
 
-        // Configurar botones
         configureButtons();
     }
 

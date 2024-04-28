@@ -1,12 +1,11 @@
 package com.anuki.book_lovers_app.service;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comment;
-import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class BookService {
 
     private final WebServiceApi webServiceApi;
 
-    public BookService(Context context) {
-        webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+    public BookService(WebServiceApi webServiceApi) {
+        this.webServiceApi = webServiceApi;
     }
 
     public void getAllBooks(BookCallback callback) {

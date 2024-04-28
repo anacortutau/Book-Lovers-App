@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.BookAdapter;
 import com.anuki.book_lovers_app.service.BookService;
+import com.anuki.book_lovers_app.web_client.WebService;
+import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
 import java.util.List;
 
@@ -37,7 +40,9 @@ public class ListBookActivity extends AppCompatActivity implements BookAdapter.C
 
         configureSwipeRefreshLayout();
 
-        bookService = new BookService(this);
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        bookService = new BookService(webServiceApi);
 
         getAllBooks();
     }

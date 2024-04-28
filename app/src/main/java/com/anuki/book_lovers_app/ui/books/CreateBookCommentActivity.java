@@ -2,6 +2,7 @@ package com.anuki.book_lovers_app.ui.books;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +46,9 @@ public class CreateBookCommentActivity extends AppCompatActivity {
     private void setUpView() {
         initializeViews();
         configureButtons();
-        bookService = new BookService(this);
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        bookService = new BookService(webServiceApi);
     }
 
     private void initializeViews() {

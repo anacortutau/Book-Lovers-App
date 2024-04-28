@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,7 +48,9 @@ public class ListCommentsBooksActivity extends AppCompatActivity implements Comm
         Intent intent = getIntent();
         if(intent.getExtras() != null){
             book = (Book) intent.getSerializableExtra("book");
-            bookService = new BookService(this);
+            Context context = this;
+            WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+            bookService = new BookService(webServiceApi);
             getAllCommentsById(book.getId());
         }
     }
