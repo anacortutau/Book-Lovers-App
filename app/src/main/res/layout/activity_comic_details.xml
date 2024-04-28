@@ -34,7 +34,7 @@
             <TextView
                 android:id="@+id/titleText"
                 android:layout_width="match_parent"
-                android:text="title"
+                android:text="@string/title"
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
@@ -46,7 +46,7 @@
             <TextView
                 android:id="@+id/authorText"
                 android:layout_width="match_parent"
-                android:text="author"
+                android:text="@string/author"
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
@@ -58,7 +58,7 @@
             <TextView
                 android:id="@+id/themeText"
                 android:layout_width="match_parent"
-                android:text="theme"
+                android:text="@string/theme"
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/sinopsisText"
                 android:layout_width="match_parent"
-                android:text="sinopsis"
+                android:text="@string/sinopsis"
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content" />
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
-                android:numStars="10"
+                android:numStars="5"
                 android:stepSize="1"
                 android:isIndicator="true" />
 

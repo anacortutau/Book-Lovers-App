@@ -76,7 +76,7 @@
                 android:id="@+id/btReturnToBookDetail"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/gradient_bt"
-                android:text="@string/returnToBookDetail"
+                android:text="@string/returnToComicDetail"
                 android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

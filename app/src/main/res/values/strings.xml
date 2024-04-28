@@ -54,6 +54,8 @@
     <string name="rating">rating</string>
     <string name="chapters">Crear Capitulo</string>
     <string name="listChapters">Listar Capitulos</string>
+    <string name="drawer_error">el dibujante no puede estar vacio</string>
+    <string name="drawer">Drawer</string>
 
     <string-array name="themes">
         <item>TERROR</item>

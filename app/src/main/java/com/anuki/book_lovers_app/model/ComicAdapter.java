@@ -43,7 +43,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicAdapter
         Comic comic = comicList.get(position);
 
         String title = comic.getTitle();
-        String author = comic.getAuthor();
+        String author = comic.getWritter();
         Double note = comic.getNote();
 
         holder.author.setText(author);

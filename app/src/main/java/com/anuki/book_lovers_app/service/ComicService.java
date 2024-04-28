@@ -43,6 +43,26 @@ public class ComicService {
         });
     }
 
+    public void getComic(int comicId, ComicDetailCallback callback) {
+        Call<Comic> call = webServiceApi.getComic(comicId);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Comic> call, Response<Comic> response) {
+                if (response.isSuccessful()) {
+                    Comic comic = response.body();
+                    callback.onSuccess(comic);
+                } else {
+                    callback.onError("Error obteniendo la lista de libros");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Comic> call, Throwable t) {
+                callback.onError("Error de red: " + t.getMessage());
+            }
+        });
+    }
+
     public void createComic(Comic comic, ComicService.ComicCreateCallback callback) {
         Call<Comic> call = webServiceApi.createComic(comic);
 
@@ -179,6 +199,12 @@ public class ComicService {
                 callback.onError("Error de red: " + t.getMessage());
             }
         });
+    }
+
+    public interface ComicDetailCallback {
+        void onSuccess(Comic comic);
+
+        void onError(String message);
     }
 
     public interface ComicCallback {

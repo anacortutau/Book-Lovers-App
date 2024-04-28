@@ -119,7 +119,7 @@ public class CreateChapterActivity extends AppCompatActivity {
         }
 
         comic = new Comic();
-        comic.setAuthor(author);
+        comic.setWritter(author);
         comic.setSinopsis(sinopsis);
         comic.setTheme(theme);
         comic.setTitle(title);

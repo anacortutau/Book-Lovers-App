@@ -12,8 +12,8 @@ public class Comic implements Serializable{
     @SerializedName("title")
     private String title;
 
-    @SerializedName("author")
-    private String author;
+    @SerializedName("writter")
+    private String writter;
 
     @SerializedName("drawer")
     private String drawer;
@@ -34,7 +34,7 @@ public class Comic implements Serializable{
     public Comic(Integer id, String title, String writter, String drawer, String sinopsis, String theme, Double note) {
         this.id = id;
         this.title = title;
-        this.author = writter;
+        this.writter = writter;
         this.drawer = drawer;
         this.sinopsis = sinopsis;
         this.theme = theme;
@@ -55,12 +55,12 @@ public class Comic implements Serializable{
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getWritter() {
+        return writter;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setWritter(String writter) {
+        this.writter = writter;
     }
 
     public String getSinopsis() {

@@ -28,6 +28,7 @@ public class CreateComicActivity extends AppCompatActivity {
 
     private EditText etTitle;
     private EditText etAuthor;
+    private EditText etDrawer;
     private EditText etSinopsis;
     private Button btCreate;
     private Button btCancel;
@@ -55,6 +56,7 @@ public class CreateComicActivity extends AppCompatActivity {
     private void initializeViews() {
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
+        etDrawer = findViewById(R.id.etDrawer);
         etSinopsis = findViewById(R.id.etSinopsis);
         btCreate = findViewById(R.id.btCreateComic);
         btCancel = findViewById(R.id.btCancel);
@@ -79,6 +81,7 @@ public class CreateComicActivity extends AppCompatActivity {
     private void cleanForm() {
         etTitle.setText(null);
         etAuthor.setText(null);
+        etDrawer.setText(null);
         etSinopsis.setText(null);
         spinner.setSelection(0);
         etTitle.requestFocus();
@@ -87,6 +90,7 @@ public class CreateComicActivity extends AppCompatActivity {
     private void createComicCheck(){
         String title = etTitle.getText().toString().trim();
         String author = etAuthor.getText().toString().trim();
+        String drawer = etDrawer.getText().toString().trim();
         String sinopsis = etSinopsis.getText().toString().trim();
         String theme = spinner.getSelectedItem().toString().trim();
 
@@ -99,6 +103,12 @@ public class CreateComicActivity extends AppCompatActivity {
         if(author.isEmpty()){
             etAuthor.setError(getResources().getString(R.string.author_error));
             etAuthor.requestFocus();
+            return;
+        }
+
+        if(drawer.isEmpty()){
+            etDrawer.setError(getResources().getString(R.string.drawer_error));
+            etDrawer.requestFocus();
             return;
         }
 
@@ -115,7 +125,8 @@ public class CreateComicActivity extends AppCompatActivity {
         }
 
         comic = new Comic();
-        comic.setAuthor(author);
+        comic.setWritter(author);
+        comic.setDrawer(drawer);
         comic.setSinopsis(sinopsis);
         comic.setTheme(theme);
         comic.setTitle(title);

@@ -43,7 +43,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ComicAda
         Comic comic = comicList.get(position);
 
         String title = comic.getTitle();
-        String author = comic.getAuthor();
+        String author = comic.getWritter();
         Double note = comic.getNote();
 
         holder.author.setText(author);

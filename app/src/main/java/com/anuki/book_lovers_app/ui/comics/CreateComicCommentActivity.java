@@ -1,5 +1,6 @@
 package com.anuki.book_lovers_app.ui.comics;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
+import com.anuki.book_lovers_app.service.ComicService;
 import com.anuki.book_lovers_app.ui.books.BookDetailsActivity;
 import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CreateComicCommentActivity extends AppCompatActivity {
 
@@ -31,6 +30,7 @@ public class CreateComicCommentActivity extends AppCompatActivity {
     private Button btMenu;
     private Comment comment;
     private Comic comic;
+    private ComicService comicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,27 @@ public class CreateComicCommentActivity extends AppCompatActivity {
         setUpView();
     }
 
-    private void setUpView(){
+    private void setUpView() {
+        initializeViews();
+        configureButtons();
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        comicService = new ComicService(webServiceApi);
+    }
 
+    private void initializeViews() {
         etTitle = findViewById(R.id.etTitleComment);
         etComment = findViewById(R.id.etCommentComment);
         etNote = findViewById(R.id.etNoteComment);
-
         btCreate = findViewById(R.id.btCreateComment);
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
+    }
 
+    private void configureButtons() {
         btCreate.setOnClickListener(v -> createCommentCheck());
-
         btCancel.setOnClickListener(v -> cleanForm());
-
-        btMenu.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MenuActivity.class)));
+        btMenu.setOnClickListener(v -> openMenuActivity());
     }
 
     private void cleanForm() {
@@ -64,24 +70,24 @@ public class CreateComicCommentActivity extends AppCompatActivity {
         etTitle.requestFocus();
     }
 
-    private void createCommentCheck(){
+    private void createCommentCheck() {
         String titleString = etTitle.getText().toString().trim();
         String commentString = etComment.getText().toString().trim();
         String noteString = etNote.getText().toString().trim();
 
-        if(titleString.isEmpty()){
+        if (titleString.isEmpty()) {
             etTitle.setError(getResources().getString(R.string.title_error));
             etTitle.requestFocus();
             return;
         }
 
-        if(commentString.isEmpty()){
+        if (commentString.isEmpty()) {
             etComment.setError(getResources().getString(R.string.comment_error));
             etComment.requestFocus();
             return;
         }
 
-        if(noteString.isEmpty()){
+        if (noteString.isEmpty()) {
             etNote.setError(getResources().getString(R.string.note_error));
             etNote.requestFocus();
             return;
@@ -94,39 +100,30 @@ public class CreateComicCommentActivity extends AppCompatActivity {
         createCommentComic();
     }
 
-
-
     private void createCommentComic() {
-
         Intent intent = getIntent();
-        if(intent.getExtras() !=null){
+        if (intent.getExtras() != null) {
             comic = (Comic) intent.getSerializableExtra("comic");
-
-            Call<Comment> call = WebService
-                    .getInstance(this)
-                    .createService(WebServiceApi.class)
-                    .createCommentBook(comment, comic.getId());
-
-
-            call.enqueue(new Callback<>() {
-                @Override
-                public void onResponse(Call<Comment> call, Response<Comment> response) {
-                    if (response.code() == 201) {
+            if (comic != null) {
+                comicService.createCommentComic(comment, comic.getId(), new ComicService.CommentCreateCallback() {
+                    @Override
+                    public void onSuccess(Comment responseComment) {
                         Toast.makeText(CreateComicCommentActivity.this, "El comentario se ha creado correctamente", Toast.LENGTH_LONG).show();
-                        Log.d("TAG1", "Comentario creado " + " id " + response.body().getId()
-                                + " titulo: " + response.body().getTitle());
-                        startActivity(new Intent(getApplicationContext(), BookDetailsActivity.class).putExtra("comic", comic));
-                    } else {
-                        Log.d("TAG1", "Error Desconocido");
+                        Log.d("TAG1", "Comentario creado " + " id " + responseComment.getId()
+                                + " titulo: " + responseComment.getTitle());
+                        startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
                     }
-                }
 
-                @Override
-                public void onFailure(Call<Comment> call, Throwable t) {
-                    Log.d("TAG1", "Error Desconocido");
-                }
-            });
+                    @Override
+                    public void onError(String message) {
+                        Log.d("TAG1", "Error al crear el comentario: " + message);
+                    }
+                });
+            }
         }
     }
 
+    private void openMenuActivity() {
+        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+    }
 }
