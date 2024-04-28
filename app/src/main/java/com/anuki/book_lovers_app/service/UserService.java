@@ -1,13 +1,7 @@
 package com.anuki.book_lovers_app.service;
 
-import android.content.Context;
-
-import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.User;
-import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,8 +11,8 @@ public class UserService {
 
     private final WebServiceApi webServiceApi;
 
-    public UserService(Context context) {
-        webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+    public UserService(WebServiceApi webServiceApi) {
+        this.webServiceApi = webServiceApi;
     }
 
     public void login(User user, UserLoginCallback callback) {
@@ -50,9 +44,40 @@ public class UserService {
         });
     }
 
+    public void register(User user, UserRegisterCallback callback) {
+        Call<Void> call = webServiceApi.registrarUsuario(user);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                switch (response.code()) {
+                    case 201:
+                        callback.onSuccess();
+                        break;
+                    case 409:
+                        callback.onError("El usuario ya existe");
+                        break;
+                    default:
+                        callback.onError("Error no definido: " + response.code());
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                callback.onError("Error de red: " + t.getMessage());
+            }
+        });
+    }
+
+
     public interface UserLoginCallback {
         void onSuccess(User user);
 
+        void onError(String message);
+    }
+
+    public interface UserRegisterCallback {
+        void onSuccess();
         void onError(String message);
     }
 }

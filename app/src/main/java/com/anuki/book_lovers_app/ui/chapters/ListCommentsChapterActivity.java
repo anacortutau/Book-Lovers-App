@@ -1,5 +1,6 @@
 package com.anuki.book_lovers_app.ui.chapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +53,9 @@ public class ListCommentsChapterActivity extends AppCompatActivity implements Co
         Intent intent = getIntent();
         if(intent.getExtras() != null){
             chapter = (Chapter) intent.getSerializableExtra("chapter");
-            comicService = new ComicService(this);
+            Context context = this;
+            WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+            comicService = new ComicService(webServiceApi);
             getAllCommentsById(chapter.getId());
         }
     }

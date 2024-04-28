@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.anuki.book_lovers_app.model.Chapter;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.model.CommentAdapter;
+import com.anuki.book_lovers_app.service.BookService;
 import com.anuki.book_lovers_app.service.ComicService;
 import com.anuki.book_lovers_app.ui.books.CommentBookDetailActivity;
 import com.anuki.book_lovers_app.ui.chapters.CommentChapterDetailActivity;
@@ -50,7 +52,9 @@ public class ListCommentsComicsActivity extends AppCompatActivity implements Com
         Intent intent = getIntent();
         if(intent.getExtras() != null){
             comic = (Comic) intent.getSerializableExtra("comic");
-            comicService = new ComicService(this);
+            Context context = this;
+            WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+            comicService = new ComicService(webServiceApi);
             getAllCommentsById(comic.getId());
         }
     }

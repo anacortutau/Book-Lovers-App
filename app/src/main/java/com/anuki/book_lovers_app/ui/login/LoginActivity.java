@@ -2,6 +2,7 @@ package com.anuki.book_lovers_app.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.anuki.book_lovers_app.model.User;
 import com.anuki.book_lovers_app.R;
+import com.anuki.book_lovers_app.service.BookService;
 import com.anuki.book_lovers_app.service.UserService;
 import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
@@ -39,7 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         initializeViews();
         configureListeners();
 
-        userService = new UserService(this);
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        userService = new UserService(webServiceApi);
     }
 
     private void initializeViews(){

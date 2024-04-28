@@ -19,8 +19,8 @@ public class ComicService {
 
     private final WebServiceApi webServiceApi;
 
-    public ComicService(Context context) {
-        webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+    public ComicService(WebServiceApi webServiceApi) {
+        this.webServiceApi = webServiceApi;
     }
 
     public void getAllComics(ComicCallback callback) {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +45,9 @@ public class ListComicActivity extends AppCompatActivity implements ComicAdapter
         initializeViews();
         configureRecyclerView();
         configureSwipeRefreshLayout();
-        comicService = new ComicService(this);
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        comicService = new ComicService(webServiceApi);
         getAllComics();
     }
 

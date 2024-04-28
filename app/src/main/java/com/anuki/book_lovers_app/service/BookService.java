@@ -5,7 +5,6 @@ import android.util.Log;
 import com.anuki.book_lovers_app.model.Book;
 import com.anuki.book_lovers_app.model.Comment;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
-import com.google.gson.Gson;
 
 import java.util.List;
 
