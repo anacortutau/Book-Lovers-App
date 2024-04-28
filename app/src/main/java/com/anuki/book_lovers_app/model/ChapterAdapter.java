@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anuki.book_lovers_app.R;
 
 import java.util.List;
+import java.util.Locale;
 
-public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ComicAdapterVH>{
+public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterAdapterVH>{
 
-    private List<Comic> comicList;
+    private List<Chapter> chapterList;
 
     private Context context;
 
@@ -25,61 +26,57 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ComicAda
 
     public ChapterAdapter(ClickedItem clickedItem) {this.clickedItem = clickedItem;}
 
-    public void setData (List<Comic> comicList){
-        this.comicList = comicList;
+    public void setData (List<Chapter> chapterList){
+        this.chapterList = chapterList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ComicAdapterVH onCreateViewHolder (@NonNull ViewGroup parent, int viewType){
+    public ChapterAdapterVH onCreateViewHolder (@NonNull ViewGroup parent, int viewType){
         context = parent.getContext();
-        return new ChapterAdapter.ComicAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_comic, parent, false));
+        return new ChapterAdapter.ChapterAdapterVH(LayoutInflater.from(context).inflate(R.layout.row_chapter, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChapterAdapter.ComicAdapterVH holder, int position) {
+    public void onBindViewHolder(@NonNull ChapterAdapter.ChapterAdapterVH holder, int position) {
 
-        Comic comic = comicList.get(position);
+        Chapter chapter = chapterList.get(position);
 
-        String title = comic.getTitle();
-        String author = comic.getWritter();
-        Double note = comic.getNote();
+        String title = chapter.getTitle();
+        String sinopsis = chapter.getSinopsis();
+        Integer number = chapter.getNumber();
 
-        holder.author.setText(author);
         holder.title.setText(title);
-        if (note != null) {
-            float normalizedRating = (float) (note * 5.0 / 10.0);
-            holder.ratingBar.setProgress(Math.round(normalizedRating));
-        }
+        holder.sinopsis.setText(sinopsis);
+        holder.number.setText(String.format(Locale.getDefault(), "%d", number));
 
-
-        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedComic(comic));
+        holder.imageMore.setOnClickListener(view -> clickedItem.ClickedChapter(chapter));
 
     }
 
     public interface ClickedItem{
-        public void ClickedComic(Comic comic);
+        void ClickedChapter(Chapter chapter);
     }
 
     @Override
     public int getItemCount() {
-        return comicList != null ? comicList.size() : 0;
+        return chapterList != null ? chapterList.size() : 0;
     }
 
-    public class ComicAdapterVH extends RecyclerView.ViewHolder {
+    public class ChapterAdapterVH extends RecyclerView.ViewHolder {
 
         TextView title;
-        TextView author;
+        TextView sinopsis;
         ImageView imageMore;
-        RatingBar ratingBar;
+        TextView number;
 
-        public ComicAdapterVH(@NonNull View itemView) {
+        public ChapterAdapterVH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleText);
-            author = itemView.findViewById(R.id.authorText);
+            sinopsis = itemView.findViewById(R.id.authorText);
             imageMore = itemView.findViewById(R.id.imageMore);
-            ratingBar = itemView.findViewById(R.id.ratingBar);
+            number = itemView.findViewById(R.id.number);
         }
     }
 

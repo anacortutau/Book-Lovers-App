@@ -38,6 +38,7 @@
         <activity android:name=".ui.books.CreateBookCommentActivity" />
         <activity android:name=".ui.comics.CommentComicDetailActivity" />
         <activity android:name=".ui.comics.CreateComicCommentActivity" />
+        <activity android:name=".ui.chapters.ListChaptersActivity" />
     </application>
 
 </manifest>
