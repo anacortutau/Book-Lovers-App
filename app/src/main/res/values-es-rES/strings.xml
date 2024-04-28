@@ -49,4 +49,12 @@
     <string name="list_comments">Lista de Comentarios</string>
     <string name="titleComment">Titulo del Comentario</string>
     <string name="userName">Usuario</string>
+    <string name="rating">Rating</string>
+    <string name="chapters">Crear Capitulo</string>
+    <string name="listChapters">Listar Capitulos</string>
+    <string name="drawer_error">El dibujante no puede estar vacio</string>
+    <string name="drawer">Dibujante</string>
+    <string name="number">Numero</string>
+    <string name="chapter_list">Lista de Capitulos</string>
+    <string name="createChapter">Crear Capitulo</string>
 </resources>

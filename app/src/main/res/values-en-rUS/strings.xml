@@ -49,4 +49,12 @@
     <string name="list_comments">Comment List</string>
     <string name="titleComment">Comment Title</string>
     <string name="userName">User</string>
+    <string name="rating">Rating</string>
+    <string name="chapters">Create Chapter</string>
+    <string name="listChapters">List Chapters</string>
+    <string name="drawer_error">Drawer cannot be empty</string>
+    <string name="drawer">Drawer</string>
+    <string name="number">Number</string>
+    <string name="chapter_list">Chapter List</string>
+    <string name="createChapter">Create Chapter</string>
 </resources>
