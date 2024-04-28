@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.anuki.book_lovers_app.R;
 import com.anuki.book_lovers_app.model.Comic;
 import com.anuki.book_lovers_app.service.ComicService;
+import com.anuki.book_lovers_app.ui.chapters.CreateChapterActivity;
 import com.anuki.book_lovers_app.ui.chapters.ListChaptersActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
 import com.anuki.book_lovers_app.web_client.WebServiceApi;
@@ -103,7 +104,7 @@ public class ComicDetailsActivity extends AppCompatActivity {
 
         btCreateChapter.setOnClickListener(v -> {
             if (comic != null) {
-                startActivity(new Intent(getApplicationContext(), ListCommentsComicsActivity.class).putExtra("comic", comic));
+                startActivity(new Intent(getApplicationContext(), CreateChapterActivity.class).putExtra("comic", comic));
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.anuki.book_lovers_app.ui.chapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.anuki.book_lovers_app.R;
+import com.anuki.book_lovers_app.model.Chapter;
 import com.anuki.book_lovers_app.model.Comic;
+import com.anuki.book_lovers_app.model.Comment;
+import com.anuki.book_lovers_app.service.ComicService;
 import com.anuki.book_lovers_app.shared.SharedResources;
+import com.anuki.book_lovers_app.ui.comics.ComicDetailsActivity;
+import com.anuki.book_lovers_app.ui.comics.CreateComicCommentActivity;
 import com.anuki.book_lovers_app.ui.login.LoginActivity;
 import com.anuki.book_lovers_app.ui.menu.MenuActivity;
 import com.anuki.book_lovers_app.web_client.WebService;
@@ -27,54 +33,45 @@ import retrofit2.Response;
 public class CreateChapterActivity extends AppCompatActivity {
 
     private EditText etTitle;
-    private EditText etAuthor;
+    private EditText etNumber;
     private EditText etSinopsis;
     private Button btCreate;
     private Button btCancel;
     private Button btMenu;
     private TextView tvLogout;
-    private Spinner spinner;
+    private Chapter chapter;
     private Comic comic;
+    private ComicService comicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_comic);
+        setContentView(R.layout.activity_create_chapter);
 
-        // Configurar vistas y botones
         setUpView();
     }
 
     private void setUpView() {
-        // Inicializar vistas
         initializeViews();
-
-        // Configurar spinner de temas
-        setupThemeSpinner();
-
-        // Configurar botones
+        Context context = this;
+        WebServiceApi webServiceApi = WebService.getInstance(context).createService(WebServiceApi.class);
+        comicService = new ComicService(webServiceApi);
         configureButtons();
     }
 
     private void initializeViews() {
         etTitle = findViewById(R.id.etTitle);
-        etAuthor = findViewById(R.id.etAuthor);
+        etNumber = findViewById(R.id.etNumber);
         etSinopsis = findViewById(R.id.etSinopsis);
-        btCreate = findViewById(R.id.btCreateComic);
+        btCreate = findViewById(R.id.btCreateChapter);
         btCancel = findViewById(R.id.btCancel);
         btMenu = findViewById(R.id.btMenu);
         tvLogout = findViewById(R.id.tvLogout);
-        spinner = findViewById(R.id.spinner);
     }
 
-    private void setupThemeSpinner() {
-        String[] themes = {"Select a Theme", "MYSTERY", "TERROR", "ADVENTURE", "ROMANCE", "HISTORY", "FANTASY"};
-        ArrayAdapter<String> themesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes);
-        spinner.setAdapter(themesAdapter);
-    }
 
     private void configureButtons() {
-        btCreate.setOnClickListener(v -> createComicCheck());
+        btCreate.setOnClickListener(v -> createChapterCheck());
         btCancel.setOnClickListener(v -> cleanForm());
         btMenu.setOnClickListener(v -> openMenuActivity());
         tvLogout.setOnClickListener(v -> logOut());
@@ -82,17 +79,15 @@ public class CreateChapterActivity extends AppCompatActivity {
 
     private void cleanForm() {
         etTitle.setText(null);
-        etAuthor.setText(null);
+        etNumber.setText(null);
         etSinopsis.setText(null);
-        spinner.setSelection(0);
         etTitle.requestFocus();
     }
 
-    private void createComicCheck(){
+    private void createChapterCheck(){
         String title = etTitle.getText().toString().trim();
-        String author = etAuthor.getText().toString().trim();
+        String number = etNumber.getText().toString().trim();
         String sinopsis = etSinopsis.getText().toString().trim();
-        String theme = spinner.getSelectedItem().toString().trim();
 
         if(title.isEmpty()){
             etTitle.setError(getResources().getString(R.string.title_error));
@@ -100,9 +95,9 @@ public class CreateChapterActivity extends AppCompatActivity {
             return;
         }
 
-        if(author.isEmpty()){
-            etAuthor.setError(getResources().getString(R.string.author_error));
-            etAuthor.requestFocus();
+        if(number.isEmpty()){
+            etNumber.setError(getResources().getString(R.string.author_error));
+            etNumber.requestFocus();
             return;
         }
 
@@ -112,45 +107,34 @@ public class CreateChapterActivity extends AppCompatActivity {
             return;
         }
 
-        if(theme.isEmpty() || theme.equals("Selecciona un tema")){
-            Toast.makeText(this,"Debes seleccionar un tema", Toast.LENGTH_LONG).show();
-            spinner.requestFocus();
-            return;
-        }
-
-        comic = new Comic();
-        comic.setWritter(author);
-        comic.setSinopsis(sinopsis);
-        comic.setTheme(theme);
-        comic.setTitle(title);
-        createComic();
+        chapter = new Chapter();
+        chapter.setNumber(Integer.valueOf(number));
+        chapter.setSinopsis(sinopsis);
+        chapter.setTitle(title);
+        createChapter();
     }
 
-    private void createComic() {
+    private void createChapter() {
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            comic = (Comic) intent.getSerializableExtra("comic");
+            if (comic != null) {
+                comicService.createChapter(chapter, comic.getId(), new ComicService.ChapterCreateCallback() {
+                    @Override
+                    public void onSuccess(Chapter responseChapter) {
+                        Toast.makeText(CreateChapterActivity.this, "El capitulo se ha creado correctamente", Toast.LENGTH_LONG).show();
+                        Log.d("TAG1", "capitulo creado " + " id " + responseChapter.getId()
+                                + " titulo: " + responseChapter.getTitle());
+                        startActivity(new Intent(getApplicationContext(), ComicDetailsActivity.class).putExtra("comic", comic));
+                    }
 
-        Call<Comic> call = WebService
-                .getInstance(this)
-                .createService(WebServiceApi.class)
-                .createComic(comic);
-
-        call.enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<Comic> call, Response<Comic> response) {
-                if (response.code() == 201) {
-                    Toast.makeText(CreateChapterActivity.this, "El comic se ha creado correctamente", Toast.LENGTH_LONG).show();
-                    Log.d("TAG1", "Comic creado " + " id " + response.body().getId()
-                            + " email: " + response.body().getTitle());
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                } else {
-                    Log.d("TAG1", "Error Desconocido");
-                }
+                    @Override
+                    public void onError(String message) {
+                        Log.d("TAG1", "Error al crear el capitulo: " + message);
+                    }
+                });
             }
-            @Override
-            public void onFailure(Call<Comic> call, Throwable t) {
-                Log.d("TAG1", "Error Desconocido");
-            }
-        });
-
+        }
     }
 
     private void openMenuActivity() {
