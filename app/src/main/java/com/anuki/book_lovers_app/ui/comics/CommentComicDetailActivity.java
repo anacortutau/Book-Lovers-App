@@ -23,7 +23,7 @@ public class CommentComicDetailActivity extends AppCompatActivity {
     Comment comment;
     Comic comic;
     Button btMenu;
-    Button btReturnToBookDetail;
+    Button btReturnToComicDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class CommentComicDetailActivity extends AppCompatActivity {
         note = findViewById(R.id.noteTextComment);
         commentString = findViewById(R.id.commentText);
         btMenu = findViewById(R.id.btMenu);
-        btReturnToBookDetail = findViewById(R.id.btReturnToBookDetail);
+        btReturnToComicDetail = findViewById(R.id.btReturnToComicDetail);
     }
 
     private void displayCommentDetails() {
@@ -66,14 +66,14 @@ public class CommentComicDetailActivity extends AppCompatActivity {
 
     private void configureButtons() {
         btMenu.setOnClickListener(v -> openMenuActivity());
-        btReturnToBookDetail.setOnClickListener(v -> returnToChapterDetail());
+        btReturnToComicDetail.setOnClickListener(v -> returnToComicDetail());
     }
 
     private void openMenuActivity() {
         startActivity(new Intent(getApplicationContext(), MenuActivity.class));
     }
 
-    private void returnToChapterDetail() {
+    private void returnToComicDetail() {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             comic = (Comic) intent.getSerializableExtra("comic");
