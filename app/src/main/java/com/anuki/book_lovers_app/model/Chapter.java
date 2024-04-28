@@ -12,36 +12,26 @@ public class Chapter implements Serializable{
     @SerializedName("title")
     private String title;
 
-    @SerializedName("author")
-    private String author;
-
-    @SerializedName("drawer")
-    private String drawer;
-
     @SerializedName("sinopsis")
     private String sinopsis;
 
-    @SerializedName("theme")
-    private String theme;
-
-    @SerializedName("note")
-    private Double note;
+    @SerializedName("number")
+    private Integer number;
 
     public Chapter(){
 
     }
 
-    public Chapter(Integer id, String title, String writter, String drawer, String sinopsis, String theme, Double note) {
+    public Chapter(Integer id, String title, String sinopsis, Integer number) {
         this.id = id;
         this.title = title;
-        this.author = writter;
-        this.drawer = drawer;
         this.sinopsis = sinopsis;
-        this.theme = theme;
-        this.note = note;
+        this.number = number;
     }
 
-    public Integer getId(){return id;}
+    public Integer getId() {
+        return id;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -55,14 +45,6 @@ public class Chapter implements Serializable{
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getSinopsis() {
         return sinopsis;
     }
@@ -71,27 +53,11 @@ public class Chapter implements Serializable{
         this.sinopsis = sinopsis;
     }
 
-    public String getTheme() {
-        return theme;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public Double getNote() {
-        return note;
-    }
-
-    public void setNote(Double note) {
-        this.note = note;
-    }
-
-    public String getDrawer() {
-        return drawer;
-    }
-
-    public void setDrawer(String drawer) {
-        this.drawer = drawer;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }
