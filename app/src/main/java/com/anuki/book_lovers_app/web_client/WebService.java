@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WebService {
 
-    private static final String BASE_URL = "http://10.0.2.2:8080/";
+    private static final String BASE_URL = "http://ec2-3-250-55-165.eu-west-1.compute.amazonaws.com:8080/";
     private static WebService instance;
     private final Retrofit retrofit;
 
